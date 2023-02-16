@@ -128,8 +128,8 @@ const ReferralDoctor = ({navigation, route}) => {
                     />
                     <Text style={[styles.Doctorspecialily]}>
                       {/* {doctorData?.referral_to?.direcory?.name} */}
-                      {doctorData?.referral_by?.directory?.name}
-                      {/* No Speciality */}
+                      {/* {doctorData?.referral_by?.directory?.name} */}
+                      Enternal User
                     </Text>
                   </View>
 
@@ -256,8 +256,8 @@ const ReferralDoctor = ({navigation, route}) => {
                   flex: 1,
                   textAlign: 'right',
                 }}>
-                {doctorData?.referral_by?.directory?.name}
-                {/* No speciality */}
+                {/* {doctorData?.referral_by?.directory?.name} */}
+                Enternal User
               </Text>
             </View>
             <View
