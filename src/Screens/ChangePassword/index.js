@@ -228,7 +228,9 @@ const ChangePassword = ({navigation, route}) => {
                             }}>
                             <TouchableOpacity
                               onPress={() => {
-                                navigation.dispatch(StackActions.replace('TabNav'));
+                                navigation.dispatch(
+                                  StackActions.replace('TabNav'),
+                                );
                                 // setSuccessModal(false);
                               }}
                               style={{}}>
