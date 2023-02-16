@@ -267,7 +267,7 @@ const Account = ({navigation}) => {
                   textAlign: 'center',
                 }}
                 onPress={() => {
-                  navigation.navigate('ChangePassword');
+                  navigation.navigate('ChangePassword',{Cancel:"Cancel"});
                 }}>
                 <Text
                   // Bold

@@ -73,7 +73,7 @@ const authContext = React.useMemo(
       try {
         await AsyncStorage.setItem('userToken', data.token);
         await AsyncStorage.setItem('userData', JSON.stringify(data.user));
-        await AsyncStorage.setItem('status', JSON.stringify(data?.status));
+        await AsyncStorage.setItem('status', JSON.stringify(false));
 
         if ((data.token, data.user)) {
           dispatch({ type: 'LOGIN', payload: 

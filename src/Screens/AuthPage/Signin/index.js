@@ -9,7 +9,7 @@ import {
   Modal,
   Pressable,
 } from 'react-native';
-import React, {useState,useContext} from 'react';
+import React, {useState, useContext} from 'react';
 import {Formik, Form, Field} from 'formik';
 import * as Yup from 'yup';
 import GlobalButton from '../../../Components/common/GlobalButton/GlobalButton';
@@ -56,7 +56,7 @@ const SignIn = ({navigation}) => {
             // data: Response.data,
             token: Response.data?.token?.access_token,
             user: Response.data?.user,
-            status: Response.data.user.status == 1 ? true : false,
+            status: Response.data?.user?.first_login,
           });
         } else {
           console.log('Response.message', Response.message);
@@ -100,7 +100,10 @@ const SignIn = ({navigation}) => {
                 {/* Input */}
                 <Formik
                   validationSchema={SignInSchema}
-                  initialValues={{userName: '', password: ''}}
+                  initialValues={{
+                    userName: 'esperanza.rolfson@hotmail.com',
+                    password: 'password',
+                  }}
                   onSubmit={values => {
                     handleLogin(values);
                   }}>

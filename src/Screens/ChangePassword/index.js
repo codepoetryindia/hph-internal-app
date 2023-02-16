@@ -23,7 +23,8 @@ import {PutMethod, GetRawurl} from '../../../Utils/Utils';
 import AuthContext from '../../Context/AuthContext';
 import {StackActions} from '@react-navigation/native';
 
-const ChangePassword = ({navigation}) => {
+const ChangePassword = ({navigation, route}) => {
+  const Cancel = route?.params?.Cancel;
   const [loader, setLoader] = useState(false);
   const [successModal, setSuccessModal] = useState(false);
   const [massage, setMassage] = useState('');
@@ -136,46 +137,46 @@ const ChangePassword = ({navigation}) => {
               paddingHorizontal: 10,
               color: '#fff',
             }}>
-            Cancel
+            {Cancel ? 'Cancel' : 'Skip'}
           </Text>
         </TouchableOpacity>
       </View>
 
-      <ScrollView>
-        <View style={{alignItems: 'center', marginTop: 60}}>
-          <Image
-            source={require('../../Assets/Images/unlock.png')}
-            style={styles.WaitingImage}
-            resizeMode="contain"
-          />
+      {loader == true ? (
+        <View style={styles.LoadarView}>
+          <ActivityIndicator size={'large'} color={Theme.secondary} />
+        </View>
+      ) : (
+        <ScrollView>
+          <View style={{alignItems: 'center', marginTop: 60}}>
+            <Image
+              source={require('../../Assets/Images/unlock.png')}
+              style={styles.WaitingImage}
+              resizeMode="contain"
+            />
 
-          <Formik
-            validationSchema={ChangePasswordSchema}
-            initialValues={{
-              newPassword: '',
-              confirmPassword: '',
-            }}
-            onSubmit={values => {
-              handleSubmit(values);
-              // if (values) {
-              //   setSuccessModal(true);
-              // }
-            }}>
-            {({
-              handleChange,
-              handleBlur,
-              handleSubmit,
-              values,
-              errors,
-              touched,
-              isValid,
-            }) => (
-              <>
-                {loader == true ? (
-                  <View style={styles.LoadarView}>
-                    <ActivityIndicator size={'large'} color={Theme.secondary} />
-                  </View>
-                ) : (
+            <Formik
+              validationSchema={ChangePasswordSchema}
+              initialValues={{
+                newPassword: '',
+                confirmPassword: '',
+              }}
+              onSubmit={values => {
+                handleSubmit(values);
+                // if (values) {
+                //   setSuccessModal(true);
+                // }
+              }}>
+              {({
+                handleChange,
+                handleBlur,
+                handleSubmit,
+                values,
+                errors,
+                touched,
+                isValid,
+              }) => (
+                <>
                   <>
                     <Modal transparent={true} visible={successModal}>
                       <Pressable
@@ -227,7 +228,8 @@ const ChangePassword = ({navigation}) => {
                             }}>
                             <TouchableOpacity
                               onPress={() => {
-                                setSuccessModal(false);
+                                navigation.dispatch(StackActions.replace('TabNav'));
+                                // setSuccessModal(false);
                               }}
                               style={{}}>
                               <View
@@ -325,99 +327,99 @@ const ChangePassword = ({navigation}) => {
                       />
                     </View>
                   </>
-                )}
-              </>
-            )}
-          </Formik>
-        </View>
-        <Modal transparent={true} visible={errorMassage}>
-          <Pressable
-            onPress={() => {
-              setErrorMassage(false);
-            }}
-            style={{
-              backgroundColor: '#000000aa',
-              flex: 1,
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
-            <View
+                </>
+              )}
+            </Formik>
+          </View>
+          <Modal transparent={true} visible={errorMassage}>
+            <Pressable
+              onPress={() => {
+                setErrorMassage(false);
+              }}
               style={{
-                backgroundColor: '#fff',
-                padding: 30,
-                borderRadius: 15,
-                width: '90%',
-                height: '43%',
-                // justifyContent: 'center',
+                backgroundColor: '#000000aa',
+                flex: 1,
                 alignItems: 'center',
-                flexDirection: 'column',
+                justifyContent: 'center',
               }}>
-              {/* <View style={{ flexDirection: 'row', marginBottom: 15 }}> */}
-
-              <Image
-                source={require('../../Assets/Images/errorimage.jpg')}
-                style={{width: 150, height: 150}}
-              />
-
-              <View style={{marginTop: 10}}>
-                <Text
-                  Bold
-                  style={{
-                    color: Theme.black,
-                    opacity: 0.5,
-                    fontSize: 18,
-                    textAlign: 'center',
-                  }}>
-                  {error}
-                </Text>
-              </View>
-
               <View
                 style={{
-                  flexDirection: 'row',
-                  marginTop: 11,
+                  backgroundColor: '#fff',
+                  padding: 30,
+                  borderRadius: 15,
+                  width: '90%',
+                  height: '43%',
+                  // justifyContent: 'center',
+                  alignItems: 'center',
+                  flexDirection: 'column',
                 }}>
-                <TouchableOpacity
-                  // onPress={() => {
-                  //   navigation.navigate('Homepage',{refress:"refress"});
-                  // }}
-                  style={{}}>
+                {/* <View style={{ flexDirection: 'row', marginBottom: 15 }}> */}
+
+                <Image
+                  source={require('../../Assets/Images/errorimage.jpg')}
+                  style={{width: 150, height: 150}}
+                />
+
+                <View style={{marginTop: 10}}>
+                  <Text
+                    Bold
+                    style={{
+                      color: Theme.black,
+                      opacity: 0.5,
+                      fontSize: 18,
+                      textAlign: 'center',
+                    }}>
+                    {error}
+                  </Text>
+                </View>
+
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    marginTop: 11,
+                  }}>
                   <TouchableOpacity
-                    onPress={() => {
-                      setErrorMassage(false);
-                    }}
-                    style={[
-                      {
-                        backgroundColor: Theme.secondary,
-                        justifyContent: 'space-between',
-                        paddingHorizontal: 25,
-                        marginTop: 10,
-                        marginHorizontal: 20,
-                        borderRadius: 10,
-                        width: 120,
-                        height: 55,
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                      },
-                    ]}>
-                    <View>
-                      <Text
-                        Bold
-                        style={{
-                          color: Theme.white,
-                          fontSize: 16,
-                        }}>
-                        OK
-                      </Text>
-                    </View>
+                    // onPress={() => {
+                    //   navigation.navigate('Homepage',{refress:"refress"});
+                    // }}
+                    style={{}}>
+                    <TouchableOpacity
+                      onPress={() => {
+                        setErrorMassage(false);
+                      }}
+                      style={[
+                        {
+                          backgroundColor: Theme.secondary,
+                          justifyContent: 'space-between',
+                          paddingHorizontal: 25,
+                          marginTop: 10,
+                          marginHorizontal: 20,
+                          borderRadius: 10,
+                          width: 120,
+                          height: 55,
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        },
+                      ]}>
+                      <View>
+                        <Text
+                          Bold
+                          style={{
+                            color: Theme.white,
+                            fontSize: 16,
+                          }}>
+                          OK
+                        </Text>
+                      </View>
+                    </TouchableOpacity>
                   </TouchableOpacity>
-                </TouchableOpacity>
+                </View>
+                {/* </View> */}
               </View>
-              {/* </View> */}
-            </View>
-          </Pressable>
-        </Modal>
-      </ScrollView>
+            </Pressable>
+          </Modal>
+        </ScrollView>
+      )}
     </SafeAreaView>
   );
 };
