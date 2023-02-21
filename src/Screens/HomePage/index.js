@@ -378,7 +378,7 @@ const Homepage = ({navigation}) => {
                   style={styles.searchIcon}
                   name="filter"
                   color={Theme.gray}
-                  size={30}
+                  size={25}
                 />
               </View>
             </View>
@@ -717,10 +717,20 @@ const Homepage = ({navigation}) => {
                 items={items}
                 setOpen={setOpen}
                 setValue={setdateValue}
+                listItemLabelStyle={{                  
+                  fontSize:16,
+                }}
+               
+                labelStyle= {{
+                  fontSize:16,
+                }}
+                
+                
+               
                 // defaultValue={select}
                 // setItems={setItems}
                 placeholder="Select Duration"
-                // style={styles.dropdown}
+                style={styles.dropdown}
                 placeholderStyle={styles.placeholderStyles}
                 onChangeValue={value => {
                   setdateValue(value);
@@ -839,7 +849,13 @@ const Homepage = ({navigation}) => {
                 setValue={setDirectoryValue}
                 setItems={setDirectoryItems}
                 placeholder="Select Department"
-                // style={styles.dropdown}
+                listItemLabelStyle={{                  
+                  fontSize:16,
+                }}               
+                labelStyle= {{
+                  fontSize:16,
+                }}
+                style={styles.dropdown}
                 placeholderStyle={styles.placeholderStyles}
                 onChangeValue={value => {
                   let data = {key: 'dir', Value: value};
@@ -1047,10 +1063,12 @@ const styles = StyleSheet.create({
 
   dropdown: {
     borderColor: Theme.lightgray,
+    fontSize: GlobalFontSize.H3,
     // zIndex: 99999,
   },
   placeholderStyles: {
     color: 'grey',
+    fontSize: GlobalFontSize.H3,
   },
   dropdownCompany: {
     marginHorizontal: 3,
