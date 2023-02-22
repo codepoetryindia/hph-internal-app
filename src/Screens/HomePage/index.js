@@ -30,8 +30,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 const Homepage = ({navigation}) => {
   const [loader, setLoader] = useState(false);
   const [selected, setSelected] = useState('');
-  const {appState, authContext} = useContext(AuthContext);
-
+  const {appState} = useContext(AuthContext);
   const [error, setError] = useState('');
   const [errorMassage, setErrorMassage] = useState(false);
   const [filterModel, setFilterModel] = useState(false);
@@ -41,7 +40,6 @@ const Homepage = ({navigation}) => {
   const [dateValue, setdateValue] = useState(null);
   const [directoryValue, setDirectoryValue] = useState([]);
   const [AllDirectories, setAllDirectories] = useState([]);
-  const [directoryItems, setDirectoryItems] = useState([]);
 
   // Pagination Works
   const [allDoctors, setAllDoctors] = useState([]);
@@ -49,40 +47,48 @@ const Homepage = ({navigation}) => {
   const [offset, setOffset] = useState(1);
   const [isListEnd, setIsListEnd] = useState(false);
   const [SearchKey, setSearchKey] = useState('');
-
   const [open, setOpen] = useState(false);
-  const [directoryOpen, setDirectoryOpen] = useState(false);
   const [openStatDate, setOpenStatDate] = useState(false);
   const [openEndDate, setOpenEndDate] = useState(false);
   const [csvUrl, setCsvUrl] = useState('');
+  const [modalVisible, setModalVisible] = useState(false);
+  const [successModal, setSuccessModal] = useState(false);
+  const [isFilter, setisFilter] = useState(false);
+  const [appliedFilters, setappliedFilters] = useState([]);
+  const [directoryOpen, setDirectoryOpen] = useState(false);
 
   const token = appState.token;
   let UserData = appState.data;
   let verificationStatus = appState.status;
-
-  const [isFilter, setisFilter] = useState(false);
-  const [appliedFilters, setappliedFilters] = useState([]);
 
   const [items, setItems] = useState([
     {label: 'Today', value: 'today'},
     {label: 'Last 7 days', value: 'last_7_days'},
     {label: 'Custom', value: 'custom', selected: true},
   ]);
+  const [directoryItems, setDirectoryItems] = useState([
+    {label: 'Physician', value: 'physician'},
+    {label: 'Non Physician', value: 'non-physician'},
+  ]);
 
-  useEffect(() => {
-    const filterDirectory = AllDirectories.map(x => {
-      return {
-        label: x.name,
-        value: x.name,
-      };
-    });
-    setDirectoryItems(filterDirectory);
-  }, [AllDirectories]);
+  // useEffect(() => {
+  //   const filterDirectory = AllDirectories.map(x => {
+  //     console.log("first",x)
+  //     return {
+  //       label: x.name,
+  //       value: x.name,
+
+  //     };
+  //   });
+  //   setDirectoryItems(filterDirectory);
+  // }, [AllDirectories]);
 
   const REMOTE_IMAGE_PATH = csvUrl;
   const checkPermission = async () => {
     if (Platform.OS === 'ios') {
-      downloadImage();
+      setModalVisible(false);
+      getData(false, false, true);
+      // downloadImage();
     } else {
       try {
         const granted = await PermissionsAndroid.request(
@@ -95,18 +101,22 @@ const Homepage = ({navigation}) => {
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
           // Once user grant the permission start downloading
           console.log('Storage Permission Granted.');
-          downloadImage();
+          setModalVisible(false);
+          getData(true, false, true);
+          // downloadImage();
         } else {
-          alert('Storage Permission Not Granted');
+          setError('Storage Permission Not Granted');
+          setErrorMassage(true);
+          // alert('Storage Permission Not Granted');
         }
       } catch (err) {
         console.warn(err);
       }
     }
   };
-  const downloadImage = () => {
+  const downloadCSV = Url => {
     let date = new Date();
-    let image_URL = REMOTE_IMAGE_PATH;
+    let image_URL = Url;
     let ext = getExtention(image_URL);
     console.log('ext', ext);
     ext = '.' + ext[0];
@@ -122,7 +132,7 @@ const Homepage = ({navigation}) => {
         notification: true,
         path:
           PictureDir +
-          '/file_' +
+          '/csv_' +
           Math.floor(date.getTime() + date.getSeconds() / 2) +
           ext,
         description: 'Image',
@@ -132,7 +142,7 @@ const Homepage = ({navigation}) => {
       .fetch('GET', image_URL)
       .then(res => {
         console.log('res -> ', JSON.stringify(res));
-        alert('File Downloaded Successfully.');
+        // alert('File Downloaded Successfully.');
         setSuccessModal(true);
       });
   };
@@ -215,7 +225,11 @@ const Homepage = ({navigation}) => {
     getData(true, true);
   }, [isFilter, appliedFilters, startDate, endDate]);
 
-  const getData = (pullToRefresh = false, isSearchHappened = false) => {
+  const getData = (
+    pullToRefresh = false,
+    isSearchHappened = false,
+    isCsv = false,
+  ) => {
     if (pullToRefresh) {
       setRefreshing(true);
     }
@@ -225,20 +239,29 @@ const Homepage = ({navigation}) => {
       setScrollLoading(true);
       let finalurl = `api/v1/referrals?page=${
         pullToRefresh ? 1 : offset
-      }&perPage=30&q=${SearchKey}&export_csv=true`;
+      }&perPage=30&q=${SearchKey}`;
 
       if (isFilter) {
         finalurl += getDataFilter();
       }
-      console.log(finalurl);
-      console.log('SearchKey', SearchKey);
+
+      if (isCsv) {
+        finalurl += '&export_csv=true';
+      }
+      // console.log(finalurl);
+      // console.log('SearchKey', SearchKey);
 
       GetRawurl(finalurl, token)
         .then(Response => {
           console.log(Response);
           if (Response.data.success) {
-            if (Response?.data?.data.csv_url) {
-              setCsvUrl(Response?.data?.data?.csv_url);
+            if (Response?.data?.data.csv_url && isCsv) {
+              setRefreshing(false);
+              setScrollLoading(false);
+
+              // setCsvUrl(Response?.data?.data?.csv_url);
+              downloadCSV(Response?.data?.data?.csv_url);
+              return;
             }
             if (Response?.data?.data?.referrals.length > 0) {
               // After the response increasing the offset
@@ -305,17 +328,6 @@ const Homepage = ({navigation}) => {
     );
   };
 
-  // if (status) {
-  //   return (
-  //     <ChangePassword
-  //       onPress={() => {
-  //         setStatus(false);
-  //         authContext.updateStatus();
-  //       }}
-  //     />
-  //   );
-  // }
-
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: Theme.ScreenBackground}}>
       {loader == true ? (
@@ -329,8 +341,10 @@ const Homepage = ({navigation}) => {
             style={{
               backgroundColor: Theme.primary,
               height: 80,
-              alignItems: 'center',
+              // alignItems: 'left',
               justifyContent: 'center',
+              flexDirection: 'row',
+              alignItems: 'center',
             }}>
             <View
               style={[
@@ -344,7 +358,7 @@ const Homepage = ({navigation}) => {
                 size={30}
               />
               <TextInput
-                 style={[styles.InputStyle, {width: SearchKey ? '65%' : '75%'}]}
+                style={[styles.InputStyle, {width: SearchKey ? '70%' : '80%'}]}
                 placeholder="Search"
                 placeholderTextColor={Theme.lightgray}
                 onChangeText={setSearchKey}
@@ -367,7 +381,7 @@ const Homepage = ({navigation}) => {
                     style={styles.searchIcon}
                     name="close-circle-outline"
                     color={Theme.gray}
-                    size={30}
+                    size={27}
                   />
                 ) : null}
 
@@ -382,6 +396,17 @@ const Homepage = ({navigation}) => {
                 />
               </View>
             </View>
+            <TouchableOpacity
+              onPress={() => {
+                setModalVisible(true);
+              }}>
+              <Ionicons
+                // style={styles.searchIcon}
+                name="arrow-down-circle-outline"
+                color={Theme.white}
+                size={27}
+              />
+            </TouchableOpacity>
           </View>
           <View>
             {isFilter && appliedFilters.length > 0 ? (
@@ -392,6 +417,7 @@ const Homepage = ({navigation}) => {
                   horizontal={true}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({item, index}) => {
+                    // console.log(item,"jhjhgjg")
                     return (
                       <TouchableOpacity
                         style={[
@@ -406,7 +432,12 @@ const Homepage = ({navigation}) => {
                           });
                           setappliedFilters(nextCounters);
                         }}>
-                        <Text style={{color: '#000'}}>{item?.Value}</Text>
+                        <Text
+                          style={{color: '#000', textTransform: 'capitalize'}}>
+                          {item?.Value
+                            ? item?.Value.replace(/_|-/g, ' ')
+                            : null}
+                        </Text>
                         <Ionicons
                           style={styles.searchIcon}
                           name="close"
@@ -440,39 +471,6 @@ const Homepage = ({navigation}) => {
                 </TouchableOpacity>
               </View>
             ) : null}
-          </View>
-
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'flex-end',             
-              position: 'absolute',
-              bottom: 15,
-              right: 20,
-              zIndex: 3000,
-            }}>
-            <View
-              style={{
-                backgroundColor: Theme.secondary,
-                alignItems:"center",
-                justifyContent: 'center',
-                // textAlign: 'center',
-               
-                // padding:20, 
-                height:60,
-                width:60,              
-                borderRadius: 100,
-              }}>
-              
-              <TouchableOpacity onPress={checkPermission}>
-                <Ionicons
-                  style={styles.searchIcon}
-                  name="arrow-down-circle-outline"
-                  color={Theme.white}
-                  size={40}
-                />
-              </TouchableOpacity>
-            </View>
           </View>
 
           <View styles={{marginVertical: 10}}>
@@ -552,7 +550,7 @@ const Homepage = ({navigation}) => {
                             style={[
                               styles.Doctorspecialily,
                               {
-                                color:'#3F3F3F',
+                                color: '#3F3F3F',
                               },
                             ]}>
                             {moment(item?.created_at).format('YYYY-MM-DD')}
@@ -643,6 +641,8 @@ const Homepage = ({navigation}) => {
                 <TouchableOpacity
                   onPress={() => {
                     setErrorMassage(false);
+                    setScrollLoading(false);
+                    setRefreshing(false);
                   }}
                   style={[
                     {
@@ -717,16 +717,19 @@ const Homepage = ({navigation}) => {
                 items={items}
                 setOpen={setOpen}
                 setValue={setdateValue}
-                listItemLabelStyle={{                  
-                  fontSize:16,
+                listItemLabelStyle={{
+                  fontSize: 16,
                 }}
-               
-                labelStyle= {{
-                  fontSize:16,
+                labelStyle={{
+                  fontSize: 16,
                 }}
-                
-                
-               
+                dropDownContainerStyle={{
+                  // backgroundColor: "red",
+                  borderColor: Theme.lightgray,
+                }}
+                customItemContainerStyle={{
+                  margin: 10,
+                }}
                 // defaultValue={select}
                 // setItems={setItems}
                 placeholder="Select Duration"
@@ -759,9 +762,14 @@ const Homepage = ({navigation}) => {
 
               {dateValue == 'custom' ? (
                 <>
-                  <View style={{flexDirection: 'row'}}>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      marginVertical: 10,
+                    }}>
                     <View style={{flexDirection: 'column'}}>
-                      <View style={{paddingHorizontal: 10, marginTop: 10}}>
+                      <View style={{paddingHorizontal: 2, marginTop: 10}}>
                         <Text Bold style={{color: Theme.gray}}>
                           Start Date
                         </Text>
@@ -782,7 +790,7 @@ const Homepage = ({navigation}) => {
                           modal
                           open={openStatDate}
                           maximumDate={new Date()}
-                          textColor={'#444'}
+                          // textColor={'red'}
                           date={new Date()}
                           mode={'date'}
                           onConfirm={date => {
@@ -798,7 +806,7 @@ const Homepage = ({navigation}) => {
                     </View>
 
                     <View style={{flexDirection: 'column'}}>
-                      <View style={{paddingHorizontal: 10, marginTop: 10}}>
+                      <View style={{paddingHorizontal: 2, marginTop: 10}}>
                         <Text Bold style={{color: Theme.gray}}>
                           End Date
                         </Text>
@@ -818,7 +826,7 @@ const Homepage = ({navigation}) => {
                           modal
                           open={openEndDate}
                           maximumDate={new Date()}
-                          textColor={'#444'}
+                          // textColor={'#444'}
                           date={new Date()}
                           mode={'date'}
                           onConfirm={date => {
@@ -840,7 +848,7 @@ const Homepage = ({navigation}) => {
             <View style={styles.dropdownCompany}>
               <DropDownPicker
                 zIndex={2000}
-                searchable={true}
+                // searchable={true}
                 zIndexInverse={2000}
                 open={directoryOpen}
                 value={directoryValue}
@@ -848,27 +856,31 @@ const Homepage = ({navigation}) => {
                 setOpen={setDirectoryOpen}
                 setValue={setDirectoryValue}
                 setItems={setDirectoryItems}
-                placeholder="Select Department"
-                listItemLabelStyle={{                  
-                  fontSize:16,
-                }}               
-                labelStyle= {{
-                  fontSize:16,
+                placeholder="Select User Type"
+                listItemLabelStyle={{
+                  fontSize: 16,
+                }}
+                labelStyle={{
+                  fontSize: 16,
+                }}
+                dropDownContainerStyle={{
+                  // backgroundColor: "red",
+                  borderColor: Theme.lightgray,
                 }}
                 style={styles.dropdown}
                 placeholderStyle={styles.placeholderStyles}
                 onChangeValue={value => {
-                  let data = {key: 'dir', Value: value};
+                  let data = {key: 'role', Value: value};
                   if (appliedFilters.length > 0) {
-                    let obj = appliedFilters.find(o => o.key == 'dir');
+                    let obj = appliedFilters.find(o => o.key == 'role');
                     if (!obj) {
                       setappliedFilters(prev => [...prev, data]);
                       return;
                     }
                     const nextCounters = appliedFilters.map((c, i) => {
-                      if (c.key == 'dir') {
+                      if (c.key == 'role') {
                         // Increment the clicked counter
-                        return {key: 'dir', Value: value};
+                        return {key: 'role', Value: value};
                       } else {
                         // The rest haven't changed
                         return c;
@@ -879,20 +891,22 @@ const Homepage = ({navigation}) => {
                     setappliedFilters(prev => [...prev, data]);
                   }
                 }}
-                listMode="MODAL"
+                // listMode="MODAL"
               />
             </View>
 
             <View
               style={{
                 flexDirection: 'row',
-                marginTop: 35,
+                marginTop: 20,
               }}>
               <TouchableOpacity
                 onPress={() => {
                   setIsListEnd(false);
                   setOffset(1);
                   setSearchKey('');
+                  setdateValue(null);
+                  setDirectoryValue(null);
                   setFilterModel(false);
                 }}
                 style={{}}>
@@ -927,6 +941,196 @@ const Homepage = ({navigation}) => {
                 </View>
               </TouchableOpacity>
             </View>
+          </View>
+        </Pressable>
+      </Modal>
+
+      <Modal transparent={true} visible={modalVisible}>
+        <Pressable
+          onPress={() => {
+            setModalVisible(false);
+          }}
+          style={{
+            backgroundColor: '#000000aa',
+            flex: 1,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+          <View
+            style={{
+              backgroundColor: '#fff',
+              padding: 30,
+              borderRadius: 15,
+              width: '90%',
+              height: '25%',
+              // justifyContent: 'center',
+              alignItems: 'center',
+              flexDirection: 'column',
+            }}>
+            {/* <View style={{ flexDirection: 'row', marginBottom: 15 }}> */}
+
+            <View style={{marginVertical: 15}}>
+              <Text
+                Bold
+                style={{
+                  color: Theme.lightgray,
+
+                  fontSize: 18,
+                }}>
+                Are you sure to export CSV ?
+              </Text>
+            </View>
+
+            <View
+              style={{
+                flexDirection: 'row',
+                marginTop: 11,
+              }}>
+              <TouchableOpacity onPress={() => checkPermission()} style={{}}>
+                <View
+                  style={[
+                    {
+                      backgroundColor: Theme.secondary,
+                      justifyContent: 'space-between',
+                      paddingHorizontal: 25,
+                      paddingVertical: 15,
+                      marginHorizontal: 20,
+                      borderRadius: 10,
+                      width: 120,
+                      height: 55,
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    },
+                  ]}>
+                  <View style={{flexDirection: 'row'}}>
+                    <Text
+                      Bold
+                      style={{
+                        color: Theme.white,
+                        fontSize: 16,
+                      }}>
+                      Yes
+                    </Text>
+                  </View>
+                </View>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                onPress={() => {
+                  setModalVisible(false);
+                }}
+                style={{}}>
+                <View
+                  style={[
+                    {
+                      backgroundColor: Theme.secondary,
+                      justifyContent: 'space-between',
+                      paddingHorizontal: 25,
+                      paddingVertical: 15,
+                      marginHorizontal: 20,
+                      borderRadius: 10,
+                      width: 120,
+                      height: 55,
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    },
+                  ]}>
+                  <View style={{flexDirection: 'row'}}>
+                    <Text
+                      Bold
+                      style={{
+                        fontSize: 16,
+                        color: Theme.white,
+                      }}>
+                      No
+                    </Text>
+                  </View>
+                </View>
+              </TouchableOpacity>
+            </View>
+            {/* </View> */}
+          </View>
+        </Pressable>
+      </Modal>
+
+      <Modal transparent={true} visible={successModal}>
+        <Pressable
+          onPress={() => {
+            setSuccessModal(false);
+          }}
+          style={{
+            backgroundColor: '#000000aa',
+            flex: 1,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+          <View
+            style={{
+              backgroundColor: '#fff',
+              padding: 30,
+              borderRadius: 15,
+              width: '90%',
+              minHeight: 200,
+              // justifyContent: 'center',
+              alignItems: 'center',
+              flexDirection: 'column',
+            }}>
+            {/* <View style={{ flexDirection: 'row', marginBottom: 15 }}> */}
+
+            <Image source={require('../../Assets/Images/successicon.png')} />
+
+            <View style={{marginTop: 10}}>
+              <Text
+                Bold
+                style={{
+                  color: Theme.black,
+                  opacity: 0.5,
+                  fontSize: 18,
+                  textAlign: 'center',
+                }}>
+                CSV Downloaded Successfully.
+              </Text>
+            </View>
+
+            <View
+              style={{
+                flexDirection: 'row',
+                marginTop: 11,
+              }}>
+              <TouchableOpacity
+                onPress={() => {
+                  setSuccessModal(false);
+                }}
+                style={{}}>
+                <View
+                  style={[
+                    {
+                      backgroundColor: Theme.secondary,
+                      justifyContent: 'space-between',
+                      paddingHorizontal: 25,
+                      marginTop: 10,
+                      marginHorizontal: 20,
+                      borderRadius: 10,
+                      width: 120,
+                      height: 55,
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    },
+                  ]}>
+                  <View style={{flexDirection: 'row'}}>
+                    <Text
+                      Bold
+                      style={{
+                        color: Theme.white,
+                        fontSize: 16,
+                      }}>
+                      OK
+                    </Text>
+                  </View>
+                </View>
+              </TouchableOpacity>
+            </View>
+            {/* </View> */}
           </View>
         </Pressable>
       </Modal>
@@ -971,10 +1175,11 @@ const styles = StyleSheet.create({
   textInput: {
     backgroundColor: Theme.white,
     // marginTop: 30,
+    // backgroundColor:"red",
     color: Theme.black,
     padding: 7,
-    width: '92%',
-    alignSelf: 'center',
+    width: '85%',
+    // alignSelf: 'left',
     borderRadius: 10,
     shadowColor: Theme.black,
     shadowOffset: {
@@ -987,7 +1192,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
   searchIcon: {
-    paddingLeft:3
+    paddingLeft: 3,
   },
   InputStyle: {
     color: Theme.gray,
@@ -1038,7 +1243,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
     color: Theme.black,
     paddingHorizontal: 15,
-    marginHorizontal: 10,
+    // marginHorizontal: 10,
     paddingVertical: 5,
     minWidth: '40%',
     alignSelf: 'center',
@@ -1064,6 +1269,8 @@ const styles = StyleSheet.create({
   dropdown: {
     borderColor: Theme.lightgray,
     fontSize: GlobalFontSize.H3,
+    height: 60,
+
     // zIndex: 99999,
   },
   placeholderStyles: {
@@ -1087,8 +1294,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-
-
 
   filterButton: {
     // height: 30,
