@@ -559,7 +559,7 @@ const EditProfile = ({navigation, route}) => {
                     <View
                       style={[
                         styles.textInput,
-                        {flexDirection: 'row', alignItems: 'center'},
+                        {flexDirection: 'row', alignItems: 'center',marginTop:5},
                       ]}>
                       <TextInput
                         style={styles.textinputstyle}
