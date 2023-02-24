@@ -43,8 +43,20 @@ const Account = ({navigation}) => {
     setLoader(true);
     GetRawurl('api/v1/my-account', token)
       .then(Response => {
-        setAccountDetails(Response?.data?.data?.users[0]);
-        setLoader(false);
+        if (Response.data.success) {
+          setAccountDetails(Response?.data?.data?.users[0]);
+          setLoader(false);
+        } else {
+          if (
+            Response.data.message == 'Unauthorized' &&
+            Response.data.error_code == 1101
+          ) {
+            authContext.signOut();
+          } else {
+            setError(Response.data.message);
+            setErrorMassage(true);
+          }
+        }
       })
       .catch(error => {
         setLoader(false);
@@ -267,7 +279,7 @@ const Account = ({navigation}) => {
                   textAlign: 'center',
                 }}
                 onPress={() => {
-                  navigation.navigate('ChangePassword',{Cancel:"Cancel"});
+                  navigation.navigate('ChangePassword', {Cancel: 'Cancel'});
                 }}>
                 <Text
                   // Bold

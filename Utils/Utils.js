@@ -3,7 +3,7 @@ import axios from 'axios';
 import CryptoJS from 'react-native-crypto-js';
 import moment from 'moment';
 
-const InEncrypted = true;
+const InEncrypted = false;
 const Algorithm = 'aes-256-cbc';
 const KEY = '595959b6ab46d379b89d794c87b74a51';
 const IV = '0aaff094b6dc2974';
