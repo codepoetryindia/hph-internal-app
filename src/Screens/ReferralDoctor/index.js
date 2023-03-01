@@ -78,7 +78,7 @@ const ReferralDoctor = ({navigation, route}) => {
                       : require('../../Assets/Images/referrals.png')
                   }
                   style={{width: 100, height: 100, borderRadius: 100}}
-                  resizeMode="contain"
+                  // resizeMode="contain"
                 />
               </View>
               <View

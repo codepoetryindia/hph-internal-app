@@ -520,7 +520,7 @@ const Homepage = ({navigation}) => {
                       <Image
                         source={require('../../Assets/Images/Patient.png')}
                         style={{width: 70, height: 70, borderRadius: 100}}
-                        resizeMode="contain"
+                        // resizeMode="contain"
                       />
                     </View>
                     <View
