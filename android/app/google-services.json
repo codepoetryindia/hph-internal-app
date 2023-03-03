@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "78927384229",
+    "project_id": "hphinternal",
+    "storage_bucket": "hphinternal.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:78927384229:android:b99f8a39c2ef54c615474c",
+        "android_client_info": {
+          "package_name": "com.hphinternal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "78927384229-r2decgelnaegtp85scfetgjk6nnj6cf7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBD0Y5eYIrqoIGdNXzkPm1btPyQeMqAqvg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "78927384229-r2decgelnaegtp85scfetgjk6nnj6cf7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

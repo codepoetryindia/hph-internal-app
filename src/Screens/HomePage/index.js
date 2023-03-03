@@ -30,7 +30,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 const Homepage = ({navigation}) => {
   const [loader, setLoader] = useState(false);
   const [selected, setSelected] = useState('');
-  const {appState} = useContext(AuthContext);
+  const {appState,authContext} = useContext(AuthContext);
   const [error, setError] = useState('');
   const [errorMassage, setErrorMassage] = useState(false);
   const [filterModel, setFilterModel] = useState(false);
@@ -161,8 +161,9 @@ const Homepage = ({navigation}) => {
       })
       .catch(error => {
         setLoader(false);
-        setError(error.message);
-        setErrorMassage(true);
+        console.log("error.message",error.message)
+        // setError(error.message);
+        // setErrorMassage(true);
       });
   };
 
@@ -290,9 +291,15 @@ const Homepage = ({navigation}) => {
               setRefreshing(false);
             }
           } else {
-            console.log('no data found');
-            setError(Response.data.message);
-            setErrorMassage(true);
+            if (
+              Response.data.message == 'Unauthorized' &&
+              Response.data.error_code == 1101
+            ) {
+              authContext.signOut();
+            } else {
+              setError(Response.data.message);
+              setErrorMassage(true);
+            }
           }
           // setAllDoctors(Response?.data?.data?.referrals);
           // setLoader(false);
@@ -513,7 +520,7 @@ const Homepage = ({navigation}) => {
                       <Image
                         source={require('../../Assets/Images/Patient.png')}
                         style={{width: 70, height: 70, borderRadius: 100}}
-                        resizeMode="contain"
+                        // resizeMode="contain"
                       />
                     </View>
                     <View

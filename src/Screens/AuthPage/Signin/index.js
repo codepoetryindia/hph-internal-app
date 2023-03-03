@@ -9,7 +9,7 @@ import {
   Modal,
   Pressable,
 } from 'react-native';
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {Formik, Form, Field} from 'formik';
 import * as Yup from 'yup';
 import GlobalButton from '../../../Components/common/GlobalButton/GlobalButton';
@@ -21,6 +21,8 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 // import {AuthContext} from '../../../AuthContext/Context';
 import {PostMethod} from '../../../../Utils/Utils';
 import AuthContext from '../../../Context/AuthContext';
+import messaging from '@react-native-firebase/messaging';
+// import PushNotification from 'react-native-push-notification';
 
 const SignIn = ({navigation}) => {
   // const {signIn} = React.useContext(AuthContext);
@@ -30,6 +32,35 @@ const SignIn = ({navigation}) => {
   const [errorMassage, setErrorMassage] = useState(false);
   const [error, setError] = useState('');
   const [hidePass, setHidePass] = useState(true);
+
+  const [FCMToken, setFCMToken] = useState('');
+
+  const requestUserPermission = async () => {
+    const authStatus = await messaging().requestPermission();
+    console.log('gjhgjhgjhghj', authStatus);
+    return (
+      authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+      authStatus === messaging.AuthorizationStatus.PROVISIONAL
+    );
+  };
+
+  useEffect(() => {
+    if (requestUserPermission()) {
+      messaging()
+        .getToken()
+        .then(fcmToken => {
+          setFCMToken(fcmToken);
+          console.log('FCM Token =>>>>>', fcmToken);
+        });
+    } else console.log('Not Authorixation Status ', authStatus);
+  }, []);
+
+  // useEffect(() => {
+  //   messaging().setBackgroundMessageHandler(async remoteMessage => {
+  //     console.log('Message handled in the background!', remoteMessage);
+  //     RNBeep.PlaySysSound(47);
+  //   });
+  // }, []);
 
   // const phoneRegExp =
   //  /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -45,8 +76,9 @@ const SignIn = ({navigation}) => {
     let data = {
       email: values.userName,
       password: values.password,
+      fcm_token: FCMToken,
     };
-    // console.log('data', data);
+    console.log('data nnkjnkjn', data);
     PostMethod('api/v1/session', data)
       .then(Response => {
         console.log('Send Otp', Response.data);
@@ -221,7 +253,7 @@ const SignIn = ({navigation}) => {
               padding: 30,
               borderRadius: 15,
               width: '90%',
-              height: '43%',
+              // height: '43%',
               // justifyContent: 'center',
               alignItems: 'center',
               flexDirection: 'column',
