@@ -28,6 +28,7 @@ import {PermissionsAndroid} from 'react-native';
 import DatePicker from 'react-native-date-picker';
 import DropDownPicker from 'react-native-dropdown-picker';
 
+
 const Homepage = ({navigation}) => {
   const [loader, setLoader] = useState(false);
   const [selected, setSelected] = useState('');
@@ -846,23 +847,26 @@ const Homepage = ({navigation}) => {
                               : moment(startDate).format('DD-MMM-YYYY')}
                           </Text>
                         </TouchableOpacity>
-
-                        <DatePicker
-                          modal
-                          open={openStatDate}
-                          maximumDate={new Date()}
-                          // textColor={'red'}
-                          date={new Date()}
-                          mode={'date'}
-                          onConfirm={date => {
-                            setStartDate(date);
-                            setOpenStatDate(false);
-                            //  setFieldValue('dob', date);
-                          }}
-                          onCancel={() => {
-                            setOpenStatDate(false);
-                          }}
+                        {
+                          openStatDate ? 
+                          <DatePicker
+                            modal
+                            open={openStatDate}
+                            maximumDate={new Date()}
+                            // textColor={'red'}
+                            date={new Date()}
+                            mode={'date'}
+                            onConfirm={date => {
+                              setStartDate(date);
+                              setOpenStatDate(false);
+                              //  setFieldValue('dob', date);
+                            }}
+                            onCancel={() => {
+                              setOpenStatDate(false);
+                            }}
                         />
+                          : null
+                        }
                       </View>
                     </View>
 
@@ -883,7 +887,10 @@ const Homepage = ({navigation}) => {
                               : moment(endDate).format('DD-MMM-YYYY')}
                           </Text>
                         </TouchableOpacity>
-                        <DatePicker
+                        {
+                          openEndDate ? 
+
+                          <DatePicker
                           modal
                           open={openEndDate}
                           maximumDate={new Date()}
@@ -898,7 +905,10 @@ const Homepage = ({navigation}) => {
                           onCancel={() => {
                             setOpenEndDate(false);
                           }}
-                        />
+                        /> : null
+                        }
+
+
                       </View>
                     </View>
                   </View>

@@ -21,6 +21,7 @@ import ImagePicker from 'react-native-image-crop-picker';
 import {GlobalFontSize} from '../../Components/common/CustomText';
 import {PutMethod} from '../../../Utils/Utils';
 import AuthContext from '../../Context/AuthContext';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const EditProfile = ({navigation, route}) => {
   const accountDetails = route?.params?.accountDetails;
@@ -113,8 +114,29 @@ const EditProfile = ({navigation, route}) => {
     });
   };
 
+  if (loader == true) {
+    return  (
+      <SafeAreaView style={{flex: 1, backgroundColor: Theme.white}}>
+        <View>
+          <NavigationHeaders
+            onPress={() => {
+              navigation.goBack();
+            }}
+            title="Account"
+          />
+        </View>
+        <View style={styles.LoadarView}>
+          <ActivityIndicator size={'large'} color={Theme.secondary} />
+        </View>
+      </SafeAreaView>
+    )
+  }
+
+  
+
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: Theme.white}}>
+      <KeyboardAwareScrollView style={{flexGrow:1}}>
       <Formik
         validationSchema={SignInSchema}
         initialValues={{
@@ -156,12 +178,7 @@ const EditProfile = ({navigation, route}) => {
           touched,
           isValid,
         }) => (
-          <>
-            {loader == true ? (
-              <View style={styles.LoadarView}>
-                <ActivityIndicator size={'large'} color={Theme.secondary} />
-              </View>
-            ) : (
+          <View style={{flex:1}}>
               <>
                 <View>
                   <NavigationHeaders
@@ -715,8 +732,7 @@ const EditProfile = ({navigation, route}) => {
                   />
                 </View>
               </>
-            )}
-          </>
+          </View>
         )}
       </Formik>
       <Modal transparent={true} visible={errorMassage}>
@@ -806,6 +822,7 @@ const EditProfile = ({navigation, route}) => {
           </View>
         </Pressable>
       </Modal>
+      </KeyboardAwareScrollView>
     </SafeAreaView>
   );
 };
