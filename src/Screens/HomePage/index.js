@@ -10,6 +10,7 @@ import {
   Modal,
   Pressable,
   RefreshControl,
+  Platform
 } from 'react-native';
 import React, {useEffect, useState, useContext} from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -115,10 +116,63 @@ const Homepage = ({navigation}) => {
     }
   };
   const downloadCSV = Url => {
+
+
+    if(Platform.OS == 'ios'){
+      // console.log("ios");
+      const { dirs } = RNFetchBlob.fs;
+      let ext = getExtention(Url);
+      ext = '.' + ext[0];
+      let date = new Date();
+      const dirToSave = Platform.OS == 'ios' ? dirs.DocumentDir : dirs.DownloadDir;
+      const fPath  =  dirToSave + '/' + Math.floor(date.getTime() + date.getSeconds() / 2) + ext;
+
+      const configOptions = Platform.select({
+            ios: {
+              fileCache: true,
+              path: fPath,
+            // mime: 'application/xlsx',
+            // appendExt: 'xlsx',
+            //path: filePath,
+            //appendExt: fileExt,
+            notification: true,
+            },
+          
+            // android: {
+            //   fileCache: false,
+            //   addAndroidDownloads: {
+            //     useDownloadManager: true,
+            //     notification: true,
+            //     path: fPath,
+            //     description: 'Downloading xlsx...',
+            //   }
+            // },
+          });
+
+          RNFetchBlob.config(configOptions)
+          .fetch('GET', Url)
+          .then(res => {                 
+            // console.log(res);
+            // setSuccessModal(true);
+            setTimeout(() => {
+            RNFetchBlob.ios.previewDocument('file://' + res.path());   //<---Property to display iOS option to save file
+              // RNFetchBlob.ios.openDocument(res.data);                      //<---Property to display downloaded file on documaent viewer
+            // Alert.alert(CONSTANTS.APP_NAME,'File download successfully');
+            }, 300);
+          
+          })
+          .catch(errorMessage => {
+            console.log(errorMessage);
+          });
+
+        return;
+    }
+
+
     let date = new Date();
     let image_URL = Url;
     let ext = getExtention(image_URL);
-    console.log('ext', ext);
+    // console.log('ext', ext);
     ext = '.' + ext[0];
     const {config, fs} = RNFetchBlob;
     let PictureDir = fs.dirs.PictureDir;
