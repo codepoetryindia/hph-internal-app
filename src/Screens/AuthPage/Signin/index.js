@@ -37,7 +37,7 @@ const SignIn = ({navigation}) => {
 
   const requestUserPermission = async () => {
     const authStatus = await messaging().requestPermission();
-    console.log('gjhgjhgjhghj', authStatus);
+   
     return (
       authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
       authStatus === messaging.AuthorizationStatus.PROVISIONAL
@@ -50,7 +50,7 @@ const SignIn = ({navigation}) => {
         .getToken()
         .then(fcmToken => {
           setFCMToken(fcmToken);
-          console.log('FCM Token =>>>>>', fcmToken);
+          // console.log('FCM Token =>>>>>', fcmToken);
         });
     } else console.log('Not Authorixation Status ', authStatus);
   }, []);
@@ -71,17 +71,15 @@ const SignIn = ({navigation}) => {
   });
 
   const handleLogin = values => {
-    console.log('first value', values);
     setLoader(true);
     let data = {
       email: values.userName,
       password: values.password,
       fcm_token: FCMToken,
     };
-    console.log('data nnkjnkjn', data);
     PostMethod('api/v1/session', data)
       .then(Response => {
-        console.log('Send Otp', Response.data);
+        console.log("login",Response)
         setLoader(false);
         if (Response.success === true) {
           authContext.signIn({
@@ -91,7 +89,6 @@ const SignIn = ({navigation}) => {
             status: Response.data?.user?.first_login,
           });
         } else {
-          console.log('Response.message', Response.message);
           setError(Response.message);
           setErrorMassage(true);
         }

@@ -86,7 +86,7 @@ const authContext = React.useMemo(
           });
         } 
       } catch (error) {
-        console.log('Error Occurred while login', error);
+        // console.log('Error Occurred while login', error);
       }
     },
 

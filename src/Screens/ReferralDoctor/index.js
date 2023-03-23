@@ -12,15 +12,14 @@ import {
 } from 'react-native';
 import React, {useEffect, useState, useContext} from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Theme from '../../Components/common/Theme';
 import Text from '../../Components/common/Text';
 import NavigationHeaders from '../../Components/common/NavigationHeaders';
-import Entypo from 'react-native-vector-icons/Entypo';
 import GlobalButton from '../../Components/common/GlobalButton/GlobalButton';
 import {GlobalFontSize} from '../../Components/common/CustomText';
-import {GetRawurl} from '../../../Utils/Utils';
+import {GetRawurl, PutMethod} from '../../../Utils/Utils';
 import AuthContext from '../../Context/AuthContext';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const ReferralDoctor = ({navigation, route}) => {
   const data = route?.params?.data;
@@ -28,7 +27,6 @@ const ReferralDoctor = ({navigation, route}) => {
   const {appState} = useContext(AuthContext);
   const [doctorData, setDoctorData] = useState(null);
 
-  // console.log('doctorData rrrr', doctorData);
 
   const getDoctorDetailById = token => {
     setLoader(true);
@@ -52,6 +50,27 @@ const ReferralDoctor = ({navigation, route}) => {
     getDoctorDetailById(token);
   }, []);
 
+
+  let token = appState.token;
+  const isContacted = () => {
+    setLoader(true);
+    let payload = {
+      is_contact: doctorData?.is_contact == false ? true : false,
+    };
+    PutMethod('api/v1/referrals/' + data + '/contact-status', payload, token)
+      .then(Response => {
+        if (Response.success === true) {
+          setLoader(false);
+          getDoctorDetailById(token)
+        } 
+       
+      })
+      .catch(error => {
+        console.log('error', error);
+      });
+  };
+  
+
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: Theme.white}}>
       {loader == true ? (
@@ -63,7 +82,7 @@ const ReferralDoctor = ({navigation, route}) => {
           <View>
             <NavigationHeaders
               onPress={() => {
-                navigation.goBack();
+                navigation.navigate("Homepage",{CallAgain:1});                
               }}
               title="Patient details"
             />
@@ -82,9 +101,7 @@ const ReferralDoctor = ({navigation, route}) => {
                 Bold
                 style={{
                   paddingHorizontal: 20,
-                  paddingVertical: 10,
-                  // marginTop: 15,
-                  // fontWeight: '500',
+                  paddingVertical: 10,                 
                   color: '#fff',
                 }}>
                 Patient Informations
@@ -109,41 +126,6 @@ const ReferralDoctor = ({navigation, route}) => {
                 {doctorData?.first_name} {doctorData?.last_name}
               </Text>
             </View>
-
-
-
-            {/* <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                paddingHorizontal: 20,
-              }}>
-              <Text
-                Bold
-                style={{
-                  fontSize: GlobalFontSize.H3,
-                  paddingVertical: 10,
-                  // marginTop: 15,
-
-                  color: Theme.lightgray,
-                }}>
-                Name
-              </Text>
-              <Text
-                // Bold
-                style={{
-                  fontSize: GlobalFontSize.H3,
-                  paddingVertical: 10,
-                  // marginTop: 15,
-                  // fontWeight: '600',
-                  color: Theme.lightgray,
-                  flex: 1,
-                  textAlign: 'right',
-                }}>
-                {doctorData?.first_name} {doctorData?.last_name}
-              </Text>
-            </View> */}
-
             <View
               style={{
                 flexDirection: 'row',
@@ -155,19 +137,14 @@ const ReferralDoctor = ({navigation, route}) => {
                 style={{
                   fontSize: GlobalFontSize.H3,
                   paddingVertical: 10,
-                  // marginTop: 15,
-
                   color: Theme.lightgray,
                 }}>
                 Phone
               </Text>
-              <Text
-                // Bold
+              <Text               
                 style={{
                   fontSize: GlobalFontSize.H3,
-                  paddingVertical: 10,
-                  // marginTop: 15,
-                  // fontWeight: '600',
+                  paddingVertical: 10,                 
                   color: Theme.lightgray,
                   flex: 1,
                   textAlign: 'right',
@@ -187,18 +164,14 @@ const ReferralDoctor = ({navigation, route}) => {
                 style={{
                   fontSize: GlobalFontSize.H3,
                   paddingVertical: 10,
-                  // marginTop: 15,
-
                   color: Theme.lightgray,
                 }}>
                 Date Of Birth
               </Text>
               <Text
-                // Bold
                 style={{
                   fontSize: GlobalFontSize.H3,
                   paddingVertical: 10,
-                  // marginTop: 15,
                   flex: 1,
                   textAlign: 'right',
 
@@ -213,7 +186,6 @@ const ReferralDoctor = ({navigation, route}) => {
                 flexDirection: 'row',
                 justifyContent: 'space-between',
                 paddingHorizontal: 20,
-                // alignItems:"center"
               }}>
               <Text
                 Bold
@@ -225,7 +197,6 @@ const ReferralDoctor = ({navigation, route}) => {
                 Reason
               </Text>
               <Text
-                // Bold
                 style={{
                   fontSize: GlobalFontSize.H3,
                   paddingVertical: 10,
@@ -237,6 +208,71 @@ const ReferralDoctor = ({navigation, route}) => {
               </Text>
             </View>
 
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                paddingHorizontal: 20,
+                alignItems: 'center',
+              }}>
+              <Text
+                Bold
+                style={{
+                  fontSize: GlobalFontSize.H3,
+                  paddingVertical: 10,
+                  color: Theme.lightgray,
+                }}>
+                Status
+              </Text>
+
+              <View style={{}}>
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                  <Ionicons
+                    style={{paddingHorizontal: 10}}
+                    name="call"
+                    color={Theme.secondary}
+                    size={17}
+                  />
+
+                  {doctorData?.is_contact == 1 ? (
+                    <AntDesign
+                      style={styles.searchIcon}
+                      name="checkcircle"
+                      color={'#78be21'}
+                      size={25}
+                    />
+                  ) : (
+                    <AntDesign
+                      style={styles.searchIcon}
+                      name="closecircle"
+                      color={'#ea5455'}
+                      size={25}
+                    />
+                  )}
+                </View>
+              </View>
+            </View>
+            <TouchableOpacity
+              style={{marginHorizontal: 20, alignSelf: 'flex-end'}}
+              onPress={() => {
+                isContacted();
+              }}>
+              <View
+                style={{
+                  backgroundColor:
+                    doctorData?.is_contact == true ? '#ea5455' : '#78be21',
+                  paddingHorizontal: 5,
+                  paddingVertical: 3,
+                  borderRadius: 5,
+                  width: 120,
+                  alignItems: 'center',
+                }}>
+                <Text style={{color: '#fff'}}>
+                  {doctorData?.is_contact == true ? 'Not Contacted' : 'Contacted'}
+                </Text>               
+              </View>
+            </TouchableOpacity>
+
             <View style={{marginHorizontal: 20}}>
               <GlobalButton
                 title={'Call now'}
@@ -246,21 +282,6 @@ const ReferralDoctor = ({navigation, route}) => {
                 }}
               />
             </View>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
             {/* <View style={[styles.ListStyle]}>
               <View style={{}}>
@@ -349,7 +370,6 @@ const ReferralDoctor = ({navigation, route}) => {
                 }}
               />
             </View> */}
-           
 
             <View
               style={{
@@ -435,22 +455,6 @@ const ReferralDoctor = ({navigation, route}) => {
               </TouchableOpacity>
             </View>
 
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             <View
               style={{
                 flexDirection: 'row',
@@ -484,6 +488,7 @@ const ReferralDoctor = ({navigation, route}) => {
                 justifyContent: 'space-between',
                 paddingHorizontal: 20,
                 paddingTop: 5,
+                marginBottom: 20,
               }}>
               <Text
                 Bold
