@@ -20,6 +20,7 @@ import {GlobalFontSize} from '../../Components/common/CustomText';
 import {GetRawurl, PutMethod} from '../../../Utils/Utils';
 import AuthContext from '../../Context/AuthContext';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import moment from 'moment';
 
 const ReferralDoctor = ({navigation, route}) => {
   const data = route?.params?.data;
@@ -108,7 +109,7 @@ const ReferralDoctor = ({navigation, route}) => {
               </Text>
             </View>
 
-            <View style={{alignSelf: 'center', paddingVertical: 20}}>
+            <View style={{alignItems:"center", paddingVertical: 20}}>
               <Image
                 source={require('../../Assets/Images/referrals.png')}
                 style={{width: 100, height: 100, borderRadius: 100}}
@@ -120,7 +121,7 @@ const ReferralDoctor = ({navigation, route}) => {
                   fontSize: GlobalFontSize.H3,
                   paddingVertical: 10,
                   color: Theme.lightgray,
-                  textAlign: 'right',
+                  
                 }}>
                 {/* Jone Doe */}
                 {doctorData?.first_name} {doctorData?.last_name}
@@ -178,6 +179,35 @@ const ReferralDoctor = ({navigation, route}) => {
                   color: Theme.lightgray,
                 }}>
                 {doctorData?.dob}
+              </Text>
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                paddingHorizontal: 20,
+              }}>
+              <Text
+                Bold
+                style={{
+                  fontSize: GlobalFontSize.H3,
+                  paddingVertical: 10,
+                  color: Theme.lightgray,
+                }}>
+               Age
+              </Text>
+              <Text
+                style={{
+                  fontSize: GlobalFontSize.H3,
+                  paddingVertical: 10,
+                  flex: 1,
+                  textAlign: 'right',
+
+                  color: Theme.lightgray,
+                }}>
+              {moment(new Date()).format('yyyy') -
+                  moment(doctorData?.dob).format('yyyy')}{' '}
+                Years old
               </Text>
             </View>
 
