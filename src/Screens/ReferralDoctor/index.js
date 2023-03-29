@@ -21,6 +21,7 @@ import {GetRawurl, PutMethod} from '../../../Utils/Utils';
 import AuthContext from '../../Context/AuthContext';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import moment from 'moment';
+import DropDownPicker from 'react-native-dropdown-picker';
 
 const ReferralDoctor = ({navigation, route}) => {
   const data = route?.params?.data;
@@ -28,6 +29,16 @@ const ReferralDoctor = ({navigation, route}) => {
   const {appState} = useContext(AuthContext);
   const [doctorData, setDoctorData] = useState(null);
 
+  const [dateValue, setdateValue] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [satusValue, setSatusValue] = useState('');
+
+  const [items, setItems] = useState([    
+    {label: 'Pending', value: '0'},
+    {label: 'Callback', value: '1'},
+    {label: 'Left voice mail', value: '2'},
+    {label: 'No answer', value: '3'},
+  ]);
 
   const getDoctorDetailById = token => {
     setLoader(true);
@@ -51,26 +62,24 @@ const ReferralDoctor = ({navigation, route}) => {
     getDoctorDetailById(token);
   }, []);
 
-
   let token = appState.token;
+
   const isContacted = () => {
     setLoader(true);
     let payload = {
-      is_contact: doctorData?.is_contact == false ? true : false,
+      is_contact: satusValue,
     };
     PutMethod('api/v1/referrals/' + data + '/contact-status', payload, token)
       .then(Response => {
         if (Response.success === true) {
           setLoader(false);
-          getDoctorDetailById(token)
-        } 
-       
+          getDoctorDetailById(token);
+        }
       })
       .catch(error => {
         console.log('error', error);
       });
   };
-  
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: Theme.white}}>
@@ -83,12 +92,12 @@ const ReferralDoctor = ({navigation, route}) => {
           <View>
             <NavigationHeaders
               onPress={() => {
-                navigation.navigate("Homepage",{CallAgain:1});                
+                navigation.navigate('Homepage', {CallAgain: 1});
               }}
               title="Patient details"
             />
           </View>
-          <ScrollView>
+          <ScrollView nestedScrollEnabled={true} >
             <View
               style={{
                 backgroundColor: Theme.primary,
@@ -102,14 +111,14 @@ const ReferralDoctor = ({navigation, route}) => {
                 Bold
                 style={{
                   paddingHorizontal: 20,
-                  paddingVertical: 10,                 
+                  paddingVertical: 10,
                   color: '#fff',
                 }}>
                 Patient Informations
               </Text>
             </View>
 
-            <View style={{alignItems:"center", paddingVertical: 20}}>
+            <View style={{alignItems: 'center', paddingVertical: 20}}>
               <Image
                 source={require('../../Assets/Images/referrals.png')}
                 style={{width: 100, height: 100, borderRadius: 100}}
@@ -121,7 +130,6 @@ const ReferralDoctor = ({navigation, route}) => {
                   fontSize: GlobalFontSize.H3,
                   paddingVertical: 10,
                   color: Theme.lightgray,
-                  
                 }}>
                 {/* Jone Doe */}
                 {doctorData?.first_name} {doctorData?.last_name}
@@ -142,10 +150,10 @@ const ReferralDoctor = ({navigation, route}) => {
                 }}>
                 Phone
               </Text>
-              <Text               
+              <Text
                 style={{
                   fontSize: GlobalFontSize.H3,
-                  paddingVertical: 10,                 
+                  paddingVertical: 10,
                   color: Theme.lightgray,
                   flex: 1,
                   textAlign: 'right',
@@ -194,7 +202,7 @@ const ReferralDoctor = ({navigation, route}) => {
                   paddingVertical: 10,
                   color: Theme.lightgray,
                 }}>
-               Age
+                Age
               </Text>
               <Text
                 style={{
@@ -205,7 +213,7 @@ const ReferralDoctor = ({navigation, route}) => {
 
                   color: Theme.lightgray,
                 }}>
-              {moment(new Date()).format('yyyy') -
+                {moment(new Date()).format('yyyy') -
                   moment(doctorData?.dob).format('yyyy')}{' '}
                 Years old
               </Text>
@@ -257,51 +265,212 @@ const ReferralDoctor = ({navigation, route}) => {
 
               <View style={{}}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                  <Ionicons
+                  {/* <Ionicons
                     style={{paddingHorizontal: 10}}
                     name="call"
                     color={Theme.secondary}
                     size={17}
-                  />
+                  /> */}
 
-                  {doctorData?.is_contact == 1 ? (
-                    <AntDesign
-                      style={styles.searchIcon}
-                      name="checkcircle"
-                      color={'#78be21'}
-                      size={25}
-                    />
-                  ) : (
-                    <AntDesign
-                      style={styles.searchIcon}
-                      name="closecircle"
-                      color={'#ea5455'}
-                      size={25}
-                    />
-                  )}
+                  {/* {item.contact_type == 'Pending' ? (
+                          <View
+                            style={{
+                              flex: 1,
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                              backgroundColor: '#FF8000',
+                              borderRadius: 50,
+                            }}>
+                            <Text style={{color: '#fff', paddingVertical: 2}}>
+                              Pending
+                            </Text>
+                          </View>
+                        ) : item.contact_type == 'Callback' ? (
+                          <View
+                            style={{
+                              flex: 1,
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                              backgroundColor: '#31B404',
+                              borderRadius: 50,
+                            }}>
+                            <Text style={{color: '#fff', paddingVertical: 2}}>
+                              Callback
+                            </Text>
+                          </View>
+                        ) : item.contact_type == 'Left voice mail' ? (
+                          <View
+                            style={{
+                              flex: 1,
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                              backgroundColor: '#01A9DB',
+                              borderRadius: 50,
+                            }}>
+                            <Text style={{color: '#fff', paddingVertical: 2}}>
+                              Left Voice Mail
+                            </Text>
+                          </View>
+                        ) : item.contact_type == 'No answer' ? (
+                          <View
+                            style={{
+                              flex: 1,
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                              backgroundColor: 'red',
+                              borderRadius: 50,
+                            }}>
+                            <Text style={{color: '#fff', paddingVertical: 2}}>
+                              No answer
+                            </Text>
+                          </View>
+                        ) : null} */}
+
+                  {
+                    doctorData?.contact_type == 'Pending' ? (
+                      <View
+                        style={{
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          backgroundColor: '#FF8000',
+                          borderRadius: 50,
+                          width: 100,
+                        }}>
+                        <Text style={{color: '#fff', paddingVertical: 2}}>
+                          Pending
+                        </Text>
+                      </View>
+                    ) : doctorData?.contact_type == 'Callback' ? (
+                      <View
+                        style={{
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          backgroundColor: '#31B404',
+                          borderRadius: 50,
+                          width: 100,
+                        }}>
+                        <Text style={{color: '#fff', paddingVertical: 2}}>
+                          Callback
+                        </Text>
+                      </View>
+                    ) : doctorData?.contact_type == 'Left voice mail' ? (
+                      <View
+                        style={{
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          backgroundColor: '#01A9DB',
+                          borderRadius: 50,
+                          width: 150,
+                        }}>
+                        <Text style={{color: '#fff', paddingVertical: 2}}>
+                          Left voice mail
+                        </Text>
+                      </View>
+                    ) : doctorData?.contact_type == 'No answer' ? (
+                      <View
+                        style={{
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          backgroundColor: 'red',
+                          borderRadius: 50,
+                          width: 100,
+                        }}>
+                        <Text style={{color: '#fff', paddingVertical: 2}}>
+                          No answer
+                        </Text>
+                      </View>
+                    ) : null
+
+                    // (
+                    //   <Text>gjhgjhsgdfsdgdsgdg</Text>
+                    //   // <AntDesign
+                    //   //   style={styles.searchIcon}
+                    //   //   name="checkcircle"
+                    //   //   color={'#78be21'}
+                    //   //   size={25}
+                    //   // />
+                    // ) : (
+                    //   <AntDesign
+                    //     style={styles.searchIcon}
+                    //     name="closecircle"
+                    //     color={'#ea5455'}
+                    //     size={25}
+                    //   />
+                    // )
+                  }
                 </View>
               </View>
             </View>
-            <TouchableOpacity
-              style={{marginHorizontal: 20, alignSelf: 'flex-end'}}
-              onPress={() => {
-                isContacted();
+
+
+
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                
+                alignItems: 'center',
+                paddingBottom:20,
               }}>
-              <View
-                style={{
-                  backgroundColor:
-                    doctorData?.is_contact == true ? '#ea5455' : '#78be21',
-                  paddingHorizontal: 5,
-                  paddingVertical: 3,
-                  borderRadius: 5,
-                  width: 120,
-                  alignItems: 'center',
-                }}>
-                <Text style={{color: '#fff'}}>
-                  {doctorData?.is_contact == true ? 'Not Contacted' : 'Contacted'}
-                </Text>               
+              <View style={{paddingLeft:20}}>
+                <DropDownPicker
+                  zIndex={3000}
+                  zIndexInverse={1000}
+                  open={open}
+                  value={dateValue}
+                  items={items}
+                  setOpen={setOpen}
+                  setValue={setdateValue}
+                  listItemLabelStyle={{
+                    fontSize: 16,
+                  }}
+                  labelStyle={{
+                    fontSize: 16,
+                  }}
+                  dropDownContainerStyle={{
+                    // backgroundColor: "red",
+                    borderColor: Theme.lightgray,
+                  }}
+                  customItemContainerStyle={{
+                    margin: 10,
+                  }}
+                  // defaultValue={select}
+                  // setItems={setItems}
+                  placeholder="Select a option"
+                  style={styles.dropdown}
+                  placeholderStyle={styles.placeholderStyles}
+                  onChangeValue={value => {
+                    setSatusValue(value)
+                  }}
+                />
               </View>
-            </TouchableOpacity>
+              <View style={{}}>
+
+              <TouchableOpacity
+                style={{marginHorizontal: 20, }}
+                onPress={() => {
+                  isContacted();
+                }}>
+                <View
+                  style={{
+                    backgroundColor: '#0489B1',
+                    paddingHorizontal: 10,
+                    paddingVertical: 7,
+                    borderRadius: 5,
+                    width: 120,
+                    alignItems: 'center',
+                    marginTop:15
+                  }}>
+                  <Text style={{color: '#fff'}}>
+                    {/* {doctorData?.is_contact == true
+                    ? 'Not Contacted'
+                    : 'Contacted'} */}
+                    Submit
+                  </Text>
+                </View>
+              </TouchableOpacity>
+              </View>
+            </View>
 
             <View style={{marginHorizontal: 20}}>
               <GlobalButton
@@ -574,6 +743,24 @@ const styles = StyleSheet.create({
     fontSize: GlobalFontSize.P,
     lineHeight: 19,
     marginBottom: 3,
+  },
+  dropdownCompany: {
+    marginHorizontal: 3,
+    marginBottom: 15,
+    // zIndex: 111,
+  },
+
+  dropdown: {
+    borderColor: Theme.lightgray,
+    fontSize: GlobalFontSize.H3,
+    height: 30,
+    width: 200,
+
+    // zIndex: 99999,
+  },
+  placeholderStyles: {
+    color: 'grey',
+    fontSize: GlobalFontSize.H3,
   },
 });
 

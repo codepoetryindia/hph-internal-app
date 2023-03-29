@@ -28,7 +28,7 @@ import DatePicker from 'react-native-date-picker';
 import DropDownPicker from 'react-native-dropdown-picker';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
-const Homepage = ({navigation,route}) => {
+const Homepage = ({navigation, route}) => {
   const [loader, setLoader] = useState(false);
   const [selected, setSelected] = useState('');
   const {appState, authContext} = useContext(AuthContext);
@@ -58,8 +58,6 @@ const Homepage = ({navigation,route}) => {
   const [appliedFilters, setappliedFilters] = useState([]);
   const [directoryOpen, setDirectoryOpen] = useState(false);
   const CallAgain = route?.params?.CallAgain;
-
- 
 
   const token = appState.token;
   let UserData = appState.data;
@@ -309,7 +307,7 @@ const Homepage = ({navigation,route}) => {
     }
   };
 
- const onRefresh = () => {
+  const onRefresh = () => {
     setIsListEnd(false);
     setOffset(1);
     getData(true);
@@ -318,13 +316,10 @@ const Homepage = ({navigation,route}) => {
   useEffect(() => {
     getData(true, true);
   }, [SearchKey]);
-  
+
   // useEffect(() => {
   //   onRefresh()
   // }, [CallAgain]);
-  
- 
-
 
   const renderFooter = () => {
     return (
@@ -504,7 +499,6 @@ const Homepage = ({navigation,route}) => {
                 </View>
               }
               renderItem={({item, index}) => {
-               
                 return (
                   <TouchableOpacity
                     style={[
@@ -597,7 +591,65 @@ const Homepage = ({navigation,route}) => {
                           </View>
                         </View>
 
-                        {item.is_contact == true ? (
+                        {item.contact_type == 'Pending' ? (
+                          <View
+                            style={{
+                              flex: 1,
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                              backgroundColor: '#FF8000',
+                              borderRadius: 50,
+                              opacity:0.8
+                            }}>
+                            <Text style={{color: '#fff', paddingVertical: 2}}>
+                              Pending
+                            </Text>
+                          </View>
+                        ) : item.contact_type == 'Callback' ? (
+                          <View
+                            style={{
+                              flex: 1,
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                              backgroundColor: '#31B404',
+                              borderRadius: 50,
+                              opacity:0.8
+                            }}>
+                            <Text style={{color: '#fff', paddingVertical: 2}}>
+                              Callback
+                            </Text>
+                          </View>
+                        ) : item.contact_type == 'Left voice mail' ? (
+                          <View
+                            style={{
+                              flex: 1,
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                              backgroundColor: '#01A9DB',
+                              borderRadius: 50,
+                              opacity:0.8
+                            }}>
+                            <Text style={{color: '#fff', paddingVertical: 2}}>
+                              Left Voice Mail
+                            </Text>
+                          </View>
+                        ) : item.contact_type == 'No answer' ? (
+                          <View
+                            style={{
+                              flex: 1,
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                              backgroundColor: '#DF0101',
+                              borderRadius: 50,
+                              opacity:0.8
+                            }}>
+                            <Text style={{color: '#fff', paddingVertical: 2}}>
+                              No answer
+                            </Text>
+                          </View>
+                        ) : null}
+
+                        {/* {item.is_contact == true ? (
                           <View
                             style={{
                               flex: 1,
@@ -625,7 +677,7 @@ const Homepage = ({navigation,route}) => {
                               size={25}
                             />
                           </View>
-                        )}
+                        )} */}
                       </View>
                       <View>
                         <Feather
