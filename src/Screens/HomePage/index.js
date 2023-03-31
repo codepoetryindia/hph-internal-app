@@ -27,12 +27,12 @@ import RNFetchBlob from 'rn-fetch-blob';
 import {PermissionsAndroid} from 'react-native';
 import DatePicker from 'react-native-date-picker';
 import DropDownPicker from 'react-native-dropdown-picker';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
-
-const Homepage = ({navigation}) => {
+const Homepage = ({navigation, route}) => {
   const [loader, setLoader] = useState(false);
   const [selected, setSelected] = useState('');
-  const {appState,authContext} = useContext(AuthContext);
+  const {appState, authContext} = useContext(AuthContext);
   const [error, setError] = useState('');
   const [errorMassage, setErrorMassage] = useState(false);
   const [filterModel, setFilterModel] = useState(false);
@@ -58,6 +58,7 @@ const Homepage = ({navigation}) => {
   const [isFilter, setisFilter] = useState(false);
   const [appliedFilters, setappliedFilters] = useState([]);
   const [directoryOpen, setDirectoryOpen] = useState(false);
+  const CallAgain = route?.params?.CallAgain;
 
   const token = appState.token;
   let UserData = appState.data;
@@ -102,7 +103,7 @@ const Homepage = ({navigation}) => {
         );
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
           // Once user grant the permission start downloading
-          console.log('Storage Permission Granted.');
+          // console.log('Storage Permission Granted.');
           setModalVisible(false);
           getData(true, false, true);
           // downloadImage();
@@ -111,9 +112,7 @@ const Homepage = ({navigation}) => {
           setErrorMassage(true);
           // alert('Storage Permission Not Granted');
         }
-      } catch (err) {
-        console.warn(err);
-      }
+      } catch (err) {}
     }
   };
   const downloadCSV = Url => {
@@ -173,11 +172,9 @@ const Homepage = ({navigation}) => {
     let date = new Date();
     let image_URL = Url;
     let ext = getExtention(image_URL);
-    // console.log('ext', ext);
     ext = '.' + ext[0];
     const {config, fs} = RNFetchBlob;
     let PictureDir = fs.dirs.PictureDir;
-    console.log('PictureDir', PictureDir);
 
     let options = {
       fileCache: true,
@@ -196,7 +193,6 @@ const Homepage = ({navigation}) => {
     config(options)
       .fetch('GET', image_URL)
       .then(res => {
-        console.log('res -> ', JSON.stringify(res));
         // alert('File Downloaded Successfully.');
         setSuccessModal(true);
       });
@@ -210,13 +206,12 @@ const Homepage = ({navigation}) => {
     setLoader(true);
     GetRawurl('api/v1/directories?perPage=100', token)
       .then(Response => {
-        console.log('response', Response);
         setAllDirectories(Response.data.data.directories);
         setLoader(false);
       })
       .catch(error => {
         setLoader(false);
-        console.log("error.message",error.message)
+        console.log('error.message', error.message);
         // setError(error.message);
         // setErrorMassage(true);
       });
@@ -237,7 +232,6 @@ const Homepage = ({navigation}) => {
           } else {
             queryString += `&${element.key}=${element.Value}`;
           }
-          console.log(element);
         });
       }
     }
@@ -291,7 +285,6 @@ const Homepage = ({navigation}) => {
     }
 
     if (pullToRefresh || (!scrollLoading && !isListEnd)) {
-      console.log('getData', offset);
       setScrollLoading(true);
       let finalurl = `api/v1/referrals?page=${
         pullToRefresh ? 1 : offset
@@ -309,8 +302,8 @@ const Homepage = ({navigation}) => {
 
       GetRawurl(finalurl, token)
         .then(Response => {
-          console.log(Response);
           if (Response.data.success) {
+            // console.log("Response",Response)
             if (Response?.data?.data.csv_url && isCsv) {
               setRefreshing(false);
               setScrollLoading(false);
@@ -334,8 +327,6 @@ const Homepage = ({navigation}) => {
               setScrollLoading(false);
               setRefreshing(false);
             } else {
-              console.log(offset);
-
               if (offset == 1) {
                 setAllDoctors([]);
               } else if (isSearchHappened) {
@@ -378,6 +369,10 @@ const Homepage = ({navigation}) => {
   useEffect(() => {
     getData(true, true);
   }, [SearchKey]);
+
+  // useEffect(() => {
+  //   onRefresh()
+  // }, [CallAgain]);
 
   const renderFooter = () => {
     return (
@@ -585,59 +580,157 @@ const Homepage = ({navigation}) => {
                         justifyContent: 'space-between',
                         flex: 1,
                       }}>
-                      <View style={{flex: 1}}>
-                        <Text
-                          Bold
-                          style={[
-                            styles.DoctorName,
-                            {
-                              color: '#3F3F3F',
-                            },
-                          ]}>
-                          {item?.first_name} {item?.last_name}
-                        </Text>
-
-                        <View
-                          style={{
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            marginVertical: 3,
-                          }}>
-                          <Ionicons
-                            name="calendar"
-                            color={Theme.secondary}
-                            size={15}
-                          />
+                      <View
+                        style={{
+                          flex: 1,
+                          flexDirection: 'row',
+                          alignItems: 'center',
+                        }}>
+                        <View>
                           <Text
+                            Bold
                             style={[
-                              styles.Doctorspecialily,
+                              styles.DoctorName,
                               {
                                 color: '#3F3F3F',
                               },
                             ]}>
-                            {moment(item?.created_at).format('YYYY-MM-DD')}
+                            {item?.first_name} {item?.last_name}
                           </Text>
+
+                          <View
+                            style={{
+                              flexDirection: 'row',
+                              alignItems: 'center',
+                              marginVertical: 3,
+                            }}>
+                            <Ionicons
+                              name="calendar"
+                              color={Theme.secondary}
+                              size={15}
+                            />
+                            <Text
+                              style={[
+                                styles.Doctorspecialily,
+                                {
+                                  color: '#3F3F3F',
+                                },
+                              ]}>
+                              {moment(item?.created_at).format('YYYY-MM-DD')}
+                            </Text>
+                          </View>
+
+                          <View
+                            style={{
+                              flexDirection: 'row',
+                              alignItems: 'center',
+                            }}>
+                            <Ionicons
+                              name="call"
+                              color={Theme.secondary}
+                              size={15}
+                            />
+
+                            <Text
+                              style={[
+                                styles.Doctorspecialily,
+                                {
+                                  color:
+                                    selected === item.id ? '#fff' : '#3F3F3F',
+                                },
+                              ]}>
+                              {item?.phone}
+                            </Text>
+                          </View>
                         </View>
 
-                        <View
-                          style={{flexDirection: 'row', alignItems: 'center'}}>
-                          <Ionicons
-                            name="call"
-                            color={Theme.secondary}
-                            size={15}
-                          />
+                        {item.contact_type == 'Pending' ? (
+                          <View
+                            style={{
+                              flex: 1,
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                              backgroundColor: '#FF8000',
+                              borderRadius: 50,
+                              opacity:0.8
+                            }}>
+                            <Text style={{color: '#fff', paddingVertical: 2}}>
+                              Pending
+                            </Text>
+                          </View>
+                        ) : item.contact_type == 'Callback' ? (
+                          <View
+                            style={{
+                              flex: 1,
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                              backgroundColor: '#31B404',
+                              borderRadius: 50,
+                              opacity:0.8
+                            }}>
+                            <Text style={{color: '#fff', paddingVertical: 2}}>
+                              Callback
+                            </Text>
+                          </View>
+                        ) : item.contact_type == 'Left voice mail' ? (
+                          <View
+                            style={{
+                              flex: 1,
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                              backgroundColor: '#01A9DB',
+                              borderRadius: 50,
+                              opacity:0.8
+                            }}>
+                            <Text style={{color: '#fff', paddingVertical: 2}}>
+                              Left Voice Mail
+                            </Text>
+                          </View>
+                        ) : item.contact_type == 'No answer' ? (
+                          <View
+                            style={{
+                              flex: 1,
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                              backgroundColor: '#DF0101',
+                              borderRadius: 50,
+                              opacity:0.8
+                            }}>
+                            <Text style={{color: '#fff', paddingVertical: 2}}>
+                              No answer
+                            </Text>
+                          </View>
+                        ) : null}
 
-                          <Text
-                            style={[
-                              styles.Doctorspecialily,
-                              {
-                                color:
-                                  selected === item.id ? '#fff' : '#3F3F3F',
-                              },
-                            ]}>
-                            {item?.phone}
-                          </Text>
-                        </View>
+                        {/* {item.is_contact == true ? (
+                          <View
+                            style={{
+                              flex: 1,
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                            }}>
+                            <AntDesign
+                              style={styles.searchIcon}
+                              name="checkcircle"
+                              color={'#78be21'}
+                              size={25}
+                            />
+                          </View>
+                        ) : (
+                          <View
+                            style={{
+                              flex: 1,
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                            }}>
+                            <AntDesign
+                              style={styles.searchIcon}
+                              name="closecircle"
+                              color={'#ea5455'}
+                              size={25}
+                            />
+                          </View>
+                        )} */}
                       </View>
                       <View>
                         <Feather

@@ -49,11 +49,9 @@ const EditProfile = ({navigation, route}) => {
   let token = appState.token;
   useEffect(() => {
     let UserDetails = appState.data;
-    console.log('UserDetails', UserDetails);
   }, []);
 
   const handleSubmit = values => {
-    console.log('first value', values);
     setLoader(true);
     let data = {
       first_name: values.firstname,
@@ -66,10 +64,8 @@ const EditProfile = ({navigation, route}) => {
       zip_code: values.zipcode,
       image: image ? `data:${image?.mime};base64,${image?.data}` : null,
     };
-    console.log('Edit data aaaa ', data);
     PutMethod('api/v1/my-account', data, token)
       .then(Response => {
-        console.log('Edit Profile', Response);
         setLoader(false);
         if (Response.success === true) {
           setMassage(Response.message);

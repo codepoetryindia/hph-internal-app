@@ -23,7 +23,7 @@ export const Decrypt = plainText => {
     },
   );
 
-  console.log(decrypted.toString(CryptoJS.enc.Utf8));
+  // console.log(decrypted.toString(CryptoJS.enc.Utf8));
   return decrypted.toString(CryptoJS.enc.Utf8);
 };
 
@@ -55,7 +55,7 @@ export const PostMethod = async (url, data, token) => {
     });
     if (InEncrypted) {
       if (response.data) {
-        console.log('response data', response.data);
+        // console.log('response data', response.data);
         let newData = response.data;
         return {
           ...newData,
