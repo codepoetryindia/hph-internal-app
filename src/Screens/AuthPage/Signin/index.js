@@ -35,25 +35,25 @@ const SignIn = ({navigation}) => {
 
   const [FCMToken, setFCMToken] = useState('');
 
-  const requestUserPermission = async () => {
-    const authStatus = await messaging().requestPermission();
+  // const requestUserPermission = async () => {
+  //   const authStatus = await messaging().requestPermission();
    
-    return (
-      authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-      authStatus === messaging.AuthorizationStatus.PROVISIONAL
-    );
-  };
+  //   return (
+  //     authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+  //     authStatus === messaging.AuthorizationStatus.PROVISIONAL
+  //   );
+  // };
 
-  useEffect(() => {
-    if (requestUserPermission()) {
-      messaging()
-        .getToken()
-        .then(fcmToken => {
-          setFCMToken(fcmToken);
-          // console.log('FCM Token =>>>>>', fcmToken);
-        });
-    } else console.log('Not Authorixation Status ', authStatus);
-  }, []);
+  // useEffect(() => {
+  //   if (requestUserPermission()) {
+  //     messaging()
+  //       .getToken()
+  //       .then(fcmToken => {
+  //         setFCMToken(fcmToken);
+  //         // console.log('FCM Token =>>>>>', fcmToken);
+  //       });
+  //   } else console.log('Not Authorixation Status ', authStatus);
+  // }, []);
 
   // useEffect(() => {
   //   messaging().setBackgroundMessageHandler(async remoteMessage => {
