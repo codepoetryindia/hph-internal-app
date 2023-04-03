@@ -647,7 +647,21 @@ const Homepage = ({navigation, route}) => {
                               No answer
                             </Text>
                           </View>
-                        ) : null}
+                        ) :item.contact_type == 'Appointment' ? (
+                          <View
+                            style={{
+                              flex: 1,
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                              backgroundColor: '#379237',
+                              borderRadius: 50,
+                              opacity:0.8
+                            }}>
+                            <Text style={{color: '#fff', paddingVertical: 2}}>
+                            Appointment
+                            </Text>
+                          </View>
+                        ): null}
 
                         {/* {item.is_contact == true ? (
                           <View

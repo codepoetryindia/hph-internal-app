@@ -32,6 +32,8 @@ const Account = ({navigation}) => {
   let UserData = appState.data;
   let token = appState.token;
 
+  // console.log("accountDetails",accountDetails)
+
   useFocusEffect(
     React.useCallback(() => {
       const CallAgain = Get_All_Account_Details(token);
@@ -253,6 +255,25 @@ const Account = ({navigation}) => {
                   style={styles.RightSideText}>
                   {/* 9595958685 */}
                   {accountDetails?.phone}
+                </Text>
+              </View>
+            ) : null}
+            {accountDetails?.category_type ? (
+              <View style={styles.LeftSideText}>
+                <Text
+                  Bold
+                  style={{
+                    fontSize: GlobalFontSize.H3,
+                    color: Theme.lightgray,
+                    fontFamily: 'OpenSans-SemiBold',
+                  }}>
+                  Doctor Type
+                </Text>
+                <Text
+                  // Bold
+                  style={styles.RightSideText}>
+                  {/* 9595958685 */}
+                  {accountDetails?.category_type}
                 </Text>
               </View>
             ) : null}
