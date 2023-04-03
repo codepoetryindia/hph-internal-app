@@ -38,6 +38,7 @@ const ReferralDoctor = ({navigation, route}) => {
     {label: 'Callback', value: '1'},
     {label: 'Left voice mail', value: '2'},
     {label: 'No answer', value: '3'},
+    {label: 'Appointment', value: '4'},
   ]);
 
   const getDoctorDetailById = token => {
@@ -379,7 +380,21 @@ const ReferralDoctor = ({navigation, route}) => {
                           No answer
                         </Text>
                       </View>
-                    ) : null
+                    ):
+                    doctorData?.contact_type == 'Appointment' ? (
+                      <View
+                        style={{
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          backgroundColor: '#379237',
+                          borderRadius: 50,
+                          width: 110,
+                        }}>
+                        <Text style={{color: '#fff', paddingVertical: 2}}>
+                        Appointment
+                        </Text>
+                      </View>
+                    ): null
 
                     // (
                     //   <Text>gjhgjhsgdfsdgdsgdg</Text>
