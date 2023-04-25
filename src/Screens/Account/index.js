@@ -273,7 +273,7 @@ const Account = ({navigation}) => {
                   // Bold
                   style={styles.RightSideText}>
                   {/* 9595958685 */}
-                  {accountDetails?.category_type}
+                  {accountDetails?.user_category_type}
                 </Text>
               </View>
             ) : null}
