@@ -1100,7 +1100,6 @@ const Homepage = ({navigation, route}) => {
               padding: 30,
               borderRadius: 15,
               width: '90%',
-              height: '25%',
               // justifyContent: 'center',
               alignItems: 'center',
               flexDirection: 'column',
@@ -1115,7 +1114,7 @@ const Homepage = ({navigation, route}) => {
 
                   fontSize: 18,
                 }}>
-                Are you sure to export CSV ?
+                Are you sure you want to export (CSV)?
               </Text>
             </View>
 

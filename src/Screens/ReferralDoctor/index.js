@@ -626,7 +626,7 @@ const ReferralDoctor = ({navigation, route}) => {
                   // fontWeight: '500',
                   color: '#fff',
                 }}>
-                Doctor Informations
+                PHYSICIAN INFORMATION
               </Text>
             </View>
             <View
