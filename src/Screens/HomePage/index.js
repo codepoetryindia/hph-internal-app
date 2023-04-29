@@ -28,6 +28,7 @@ import DatePicker from 'react-native-date-picker';
 import DropDownPicker from 'react-native-dropdown-picker';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import messaging from '@react-native-firebase/messaging';
+import Toast from 'react-native-simple-toast';
 
 const Homepage = ({navigation, route}) => {
   const [loader, setLoader] = useState(false);
@@ -232,6 +233,10 @@ const Homepage = ({navigation, route}) => {
     );
   };
 
+  const showToast = (message) => {
+    Toast.showWithGravity(message, Toast.LONG, Toast.TOP, { backgroundColor: 'blue' });
+  }
+
   useEffect(()=>{
     requestUserPermission();
     const unsubscribe = messaging().onMessage(async remoteMessage => {
@@ -239,6 +244,7 @@ const Homepage = ({navigation, route}) => {
       let type = JSON.parse(remoteMessage?.data?.type);
       if(type.type == "Referral Updated" || type.type == "Create Referral"){
         getData(true, true);
+        showToast(remoteMessage?.notification?.body)
       }
     });
     return unsubscribe;

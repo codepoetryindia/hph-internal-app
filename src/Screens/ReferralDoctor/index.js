@@ -23,6 +23,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import moment from 'moment';
 import DropDownPicker from 'react-native-dropdown-picker';
 import messaging from '@react-native-firebase/messaging';
+import Toast from 'react-native-simple-toast';
 
 const ReferralDoctor = ({navigation, route}) => {
   const data = route?.params?.data;
@@ -66,6 +67,10 @@ const ReferralDoctor = ({navigation, route}) => {
     getDoctorDetailById(token);
   }, []);
 
+  const showToast = (message) => {
+    Toast.showWithGravity(message, Toast.LONG, Toast.TOP, { backgroundColor: 'blue' });
+  }
+
   const requestUserPermission= async ()=> {
     const authStatus = await messaging().requestPermission();
     return(
@@ -82,6 +87,7 @@ const ReferralDoctor = ({navigation, route}) => {
       if(type.type = "Referral Updated"){
         let token = appState.token;
         getDoctorDetailById(token);
+        showToast(remoteMessage?.notification?.body)
       }
     });
     return unsubscribe;
