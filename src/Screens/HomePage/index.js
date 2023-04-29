@@ -27,6 +27,7 @@ import {PermissionsAndroid} from 'react-native';
 import DatePicker from 'react-native-date-picker';
 import DropDownPicker from 'react-native-dropdown-picker';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import messaging from '@react-native-firebase/messaging';
 
 const Homepage = ({navigation, route}) => {
   const [loader, setLoader] = useState(false);
@@ -221,6 +222,27 @@ const Homepage = ({navigation, route}) => {
     setOffset(1);
     getData(true, true);
   }, [isFilter, appliedFilters, startDate, endDate]);
+
+  const requestUserPermission= async ()=> {
+    const authStatus = await messaging().requestPermission();
+    return(
+        authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+        authStatus === messaging.AuthorizationStatus.PROVISIONAL
+    
+    );
+  };
+
+  useEffect(()=>{
+    requestUserPermission();
+    const unsubscribe = messaging().onMessage(async remoteMessage => {
+      console.log("remoteMessage", remoteMessage)
+      let type = JSON.parse(remoteMessage?.data?.type);
+      if(type.type == "Referral Updated" || type.type == "Create Referral"){
+        getData(true, true);
+      }
+    });
+    return unsubscribe;
+  },[])
 
   const getData = (
     pullToRefresh = false,

@@ -22,6 +22,7 @@ import AuthContext from '../../Context/AuthContext';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import moment from 'moment';
 import DropDownPicker from 'react-native-dropdown-picker';
+import messaging from '@react-native-firebase/messaging';
 
 const ReferralDoctor = ({navigation, route}) => {
   const data = route?.params?.data;
@@ -40,6 +41,8 @@ const ReferralDoctor = ({navigation, route}) => {
     {label: 'No answer', value: '3'},
     {label: 'Appointment', value: '4'},
   ]);
+
+
 
   const getDoctorDetailById = token => {
     setLoader(true);
@@ -62,6 +65,27 @@ const ReferralDoctor = ({navigation, route}) => {
     let token = appState.token;
     getDoctorDetailById(token);
   }, []);
+
+  const requestUserPermission= async ()=> {
+    const authStatus = await messaging().requestPermission();
+    return(
+        authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+        authStatus === messaging.AuthorizationStatus.PROVISIONAL
+    
+    );
+  };
+
+  useEffect(()=>{   
+    requestUserPermission();
+    const unsubscribe = messaging().onMessage(async remoteMessage => {
+      let type = JSON.parse(remoteMessage?.data?.type);
+      if(type.type = "Referral Updated"){
+        let token = appState.token;
+        getDoctorDetailById(token);
+      }
+    });
+    return unsubscribe;
+  },[])
 
   let token = appState.token;
 
