@@ -726,33 +726,60 @@ const ReferralDoctor = ({navigation, route}) => {
                 {doctorData?.referral_by?.email}
               </Text>
             </View>
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                paddingHorizontal: 20,
-                paddingTop: 5,
-                marginBottom: 20,
-              }}>
-              <Text
-                Bold
+            {doctorData?.referral_by?.doctor?.speciality &&
+              <View
                 style={{
-                  fontSize: GlobalFontSize.H3,
-                  color: Theme.lightgray,
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  paddingHorizontal: 20,
+                  paddingTop: 5,
+                  marginBottom: 20,
                 }}>
-                Speciality
-              </Text>
-              <Text
+                <Text
+                  Bold
+                  style={{
+                    fontSize: GlobalFontSize.H3,
+                    color: Theme.lightgray,
+                  }}>
+                  Speciality
+                </Text>
+                <Text
+                  style={{
+                    fontSize: GlobalFontSize.H3,
+                    color: Theme.lightgray,
+                    flex: 1,
+                    textAlign: 'right',
+                  }}>
+                  {doctorData?.referral_by?.doctor?.speciality}
+                </Text>
+              </View>
+              }
+              <View
                 style={{
-                  fontSize: GlobalFontSize.H3,
-                  color: Theme.lightgray,
-                  flex: 1,
-                  textAlign: 'right',
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  paddingHorizontal: 20,
+                  paddingTop: 5,
+                  marginBottom: 20,
                 }}>
-                {/* {doctorData?.referral_by?.directory?.name} */}
-                External User
-              </Text>
-            </View>
+                <Text
+                  Bold
+                  style={{
+                    fontSize: GlobalFontSize.H3,
+                    color: Theme.lightgray,
+                  }}>
+                  Type
+                </Text>
+                <Text
+                  style={{
+                    fontSize: GlobalFontSize.H3,
+                    color: Theme.lightgray,
+                    flex: 1,
+                    textAlign: 'right',
+                  }}>
+                    {doctorData?.referral_by?.roles[0]?.name != 'normal-user' ? "Physician" : "Non Physician"}
+                </Text>
+              </View>
           </ScrollView>
         </>
       )}
