@@ -84,6 +84,8 @@ const ReferralDoctor = ({navigation, route}) => {
     requestUserPermission();
     const unsubscribe = messaging().onMessage(async remoteMessage => {
       let type = JSON.parse(remoteMessage?.data?.type);
+      console.log("remoteMessage_2", remoteMessage)
+      console.log("type_2", type)
       if(type.type = "Referral Updated"){
         let token = appState.token;
         getDoctorDetailById(token);

@@ -240,12 +240,12 @@ const Homepage = ({navigation, route}) => {
   useEffect(()=>{
     requestUserPermission();
     const unsubscribe = messaging().onMessage(async remoteMessage => {
-      console.log("remoteMessage", remoteMessage)
       let type = JSON.parse(remoteMessage?.data?.type);
-      if(type.type == "Referral Updated" || type.type == "Create Referral"){
+      if(type.type = "Referral Updated" || type.type == "Create Referral"){
         getData(true, true);
         showToast(remoteMessage?.notification?.body)
       }
+
     });
     return unsubscribe;
   },[])
