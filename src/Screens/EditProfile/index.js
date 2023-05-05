@@ -21,6 +21,7 @@ import ImagePicker from 'react-native-image-crop-picker';
 import {GlobalFontSize} from '../../Components/common/CustomText';
 import {PutMethod} from '../../../Utils/Utils';
 import AuthContext from '../../Context/AuthContext';
+import {phoneNumberAutoFormat, removehoneNumberFormat} from '../../../Utils/phoneNumberAutoFormat';
 
 const EditProfile = ({navigation, route}) => {
   const accountDetails = route?.params?.accountDetails;
@@ -42,8 +43,14 @@ const EditProfile = ({navigation, route}) => {
     street_address: Yup.string().required('Address is required '),
     city: Yup.string().required('City is required '),
     state: Yup.string().required('State is required '),
-    zipcode: Yup.string().required('Zip code is required '),
-  });
+    phone2: Yup.string()
+        .nullable()
+        .notRequired()
+        .test('mobileNumber', 'Phone Number 2 is not valid', data => {
+           return (removehoneNumberFormat(data).length < 10 ? false : true )
+        }),
+    zipcode: Yup.string().required('Zip code is required').min(5, "Zip code should be minimum 5 character").max(5, "Zip code should be maximum 5 character"),
+    });
 
   let token = appState.token;
   useEffect(() => {
@@ -51,12 +58,13 @@ const EditProfile = ({navigation, route}) => {
   }, []);
 
   const handleSubmit = values => {
+    let mobileNumber = removehoneNumberFormat(values.phone2);
     setLoader(true);
     let data = {
       first_name: values.firstname,
       last_name: values.lastname,
       email: values.email,
-      alter_phone: parseInt(values.phone2),
+      alter_phone: Number(mobileNumber),
       address: values.street_address,
       city: values.city,
       state: values.state,
@@ -564,9 +572,20 @@ const EditProfile = ({navigation, route}) => {
                         keyboardType="phone-pad"
                         onChangeText={handleChange('phone2')}
                         onBlur={handleBlur('phone2')}
-                        value={values.phone2}
+                        value={phoneNumberAutoFormat(values.phone2)}
                       />
                     </View>
+                    {errors.phone2 && touched.phone2 && (
+                      <View style={styles.errorstyle}>
+                        <Text
+                          style={{
+                            fontSize: GlobalFontSize.Error,
+                            color: 'red',
+                          }}>
+                          {errors.phone2}
+                        </Text>
+                      </View>
+                    )}
 
                     <View
                       style={[
@@ -658,6 +677,8 @@ const EditProfile = ({navigation, route}) => {
                         style={styles.textinputstyle}
                         placeholder="Zip Code"
                         placeholderTextColor={Theme.lightgray}
+                        keyboardType="numeric"
+                        maxLength={5}
                         onChangeText={handleChange('zipcode')}
                         onBlur={handleBlur('zipcode')}
                         value={values.zipcode}

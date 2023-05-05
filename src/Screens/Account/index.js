@@ -19,6 +19,7 @@ import AuthContext from '../../Context/AuthContext';
 import {GetRawurl} from '../../../Utils/Utils';
 import {useFocusEffect} from '@react-navigation/native';
 import Header from '../../Components/common/Header';
+import {phoneNumberAutoFormat} from '../../../Utils/phoneNumberAutoFormat';
 
 const Account = ({navigation}) => {
   const {authContext} = useContext(AuthContext);
@@ -254,7 +255,7 @@ const Account = ({navigation}) => {
                   // Bold
                   style={styles.RightSideText}>
                   {/* 9595958685 */}
-                  {accountDetails?.phone}
+                  {phoneNumberAutoFormat(accountDetails?.phone)}
                 </Text>
               </View>
             ) : null}
@@ -342,7 +343,7 @@ const Account = ({navigation}) => {
                 // Bold
                 style={styles.RightSideText}>
                 {accountDetails?.doctor?.alter_phone
-                  ? accountDetails?.doctor?.alter_phone
+                  ? phoneNumberAutoFormat(accountDetails?.doctor?.alter_phone)
                   : null}
               </Text>
             </View>

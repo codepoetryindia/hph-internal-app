@@ -29,6 +29,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import messaging from '@react-native-firebase/messaging';
 import Toast from 'react-native-simple-toast';
+import {phoneNumberAutoFormat} from '../../../Utils/phoneNumberAutoFormat';
 
 const Homepage = ({navigation, route}) => {
   const [loader, setLoader] = useState(false);
@@ -614,7 +615,7 @@ const Homepage = ({navigation, route}) => {
                                     selected === item.id ? '#fff' : '#3F3F3F',
                                 },
                               ]}>
-                              {item?.phone}
+                              {phoneNumberAutoFormat(item?.phone)}
                             </Text>
                           </View>
                         </View>

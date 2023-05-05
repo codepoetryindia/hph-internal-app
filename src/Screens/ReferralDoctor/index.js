@@ -24,6 +24,7 @@ import moment from 'moment';
 import DropDownPicker from 'react-native-dropdown-picker';
 import messaging from '@react-native-firebase/messaging';
 import Toast from 'react-native-simple-toast';
+import {phoneNumberAutoFormat} from '../../../Utils/phoneNumberAutoFormat';
 
 const ReferralDoctor = ({navigation, route}) => {
   const data = route?.params?.data;
@@ -191,7 +192,7 @@ const ReferralDoctor = ({navigation, route}) => {
                   flex: 1,
                   textAlign: 'right',
                 }}>
-                {doctorData?.phone}
+                {phoneNumberAutoFormat(doctorData?.phone)}
               </Text>
             </View>
 
@@ -247,7 +248,7 @@ const ReferralDoctor = ({navigation, route}) => {
                   color: Theme.lightgray,
                 }}>
                 {moment(new Date()).format('yyyy') -
-                  moment(doctorData?.dob).format('yyyy')}{' '}
+                  doctorData?.dob_year}{' '}
                 Years old
               </Text>
             </View>
@@ -696,7 +697,7 @@ const ReferralDoctor = ({navigation, route}) => {
                     paddingVertical: 10,
                     color: Theme.lightgray,
                   }}>
-                  {doctorData?.referral_by?.phone}
+                  {phoneNumberAutoFormat(doctorData?.referral_by?.phone)}
                 </Text>
               </TouchableOpacity>
             </View>
