@@ -47,7 +47,11 @@ const EditProfile = ({navigation, route}) => {
         .nullable()
         .notRequired()
         .test('mobileNumber', 'Phone Number 2 is not valid', data => {
-           return (removehoneNumberFormat(data).length < 10 ? false : true )
+          if(data){
+            return (removehoneNumberFormat(data).length < 10 ? false : true )
+          } else {
+            return false;
+          }
         }),
     zipcode: Yup.string().required('Zip code is required').min(5, "Zip code should be minimum 5 character").max(5, "Zip code should be maximum 5 character"),
     });
@@ -570,6 +574,7 @@ const EditProfile = ({navigation, route}) => {
                         placeholder="Phone Number 2 (Optional)"
                         placeholderTextColor={Theme.lightgray}
                         keyboardType="phone-pad"
+                        maxLength={12}
                         onChangeText={handleChange('phone2')}
                         onBlur={handleBlur('phone2')}
                         value={phoneNumberAutoFormat(values.phone2)}
