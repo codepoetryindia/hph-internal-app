@@ -7,6 +7,7 @@ import EditProfile from '../Screens/EditProfile';
 import AuthContext from '../Context/AuthContext';
 import ChangePassword from '../Screens/ChangePassword';
 import RepeatWellcomePage from './../Screens/AuthPage/RepeatWellcomePage';
+import LogoutPage from '../Screens/AuthPage/LogoutPage';
 
 const HomeNavigator = () => {
   const HomeStack = createStackNavigator();
@@ -21,6 +22,7 @@ const HomeNavigator = () => {
       <HomeStack.Screen name="ReferralDoctor" component={ReferralDoctor} />
       <HomeStack.Screen name="EditProfile" component={EditProfile} />
       <HomeStack.Screen name="ChangePassword" component={ChangePassword} />
+      <HomeStack.Screen name="LogoutPage" component={LogoutPage}/>
     </HomeStack.Navigator>
   );
 };
