@@ -362,14 +362,14 @@ const Homepage = ({navigation, route}) => {
   };
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: appliedFilters.length > 0 ? Theme.ScreenBackground : Theme.white}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: allDoctors.length > 0 ? Theme.ScreenBackground : Theme.white}}>
       {loader == true ? (
         <View style={styles.LoadarView}>
           <ActivityIndicator size={'large'} color={Theme.primary} />
         </View>
       ) : (
         <>
-          <Header name="Referrals" />
+          <Header name="Your Referrals" />
           <View
             style={{
               backgroundColor: Theme.primary,
