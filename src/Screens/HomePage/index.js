@@ -362,7 +362,7 @@ const Homepage = ({navigation, route}) => {
   };
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: Theme.ScreenBackground}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: appliedFilters.length > 0 ? Theme.ScreenBackground : Theme.white}}>
       {loader == true ? (
         <View style={styles.LoadarView}>
           <ActivityIndicator size={'large'} color={Theme.primary} />
@@ -521,8 +521,13 @@ const Homepage = ({navigation, route}) => {
               onEndReachedThreshold={0.5}
               ListFooterComponent={renderFooter}
               ListEmptyComponent={
-                <View style={{flex: 1, alignItems: 'center', marginTop: 250}}>
-                  <Text style={{color: Theme.secondary, fontWeight: '600'}}>
+                <View style={styles.appLogoStyleContainer}>
+                  <Image
+                    source={require('../../Assets/Images/notes.png')}
+                    style={styles.appLogoStyle}
+                    resizeMode="contain"
+                  />
+                  <Text Bold style={{color: Theme.secondary}}>
                     No referrals found yet.
                   </Text>
                 </View>
@@ -1283,9 +1288,18 @@ const Homepage = ({navigation, route}) => {
 };
 
 const styles = StyleSheet.create({
+  appLogoStyleContainer: {
+    flex: 1,
+    minHeight: 300,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   appLogoStyle: {
-    width: 100,
-    height: 30,
+    width: 250,
+    height: 300,
+    resizeMode: 'contain',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   LoadarView: {
     flex: 1,
