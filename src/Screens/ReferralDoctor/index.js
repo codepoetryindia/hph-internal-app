@@ -490,6 +490,10 @@ const ReferralDoctor = ({navigation, route}) => {
                   onChangeValue={value => {
                     setSatusValue(value)
                   }}
+                  listMode="SCROLLVIEW"
+                  scrollViewProps={{
+                    nestedScrollEnabled: true,
+                  }}
                 />
               </View>
               <View style={{}}>
