@@ -47,15 +47,17 @@ const RepeatWellcomePage = ({navigation, route}) => {
             </Text>
           </View>
 
-          <GlobalButton
-            title={'Continue '}
-            inlineStyle={styles.Button}
-            onPress={() => {
-              navigation.dispatch(
-                StackActions.replace('TabNav')
-              );
-            }}
-          />
+          <View style={styles.buttonContainer}>
+            <GlobalButton
+              title={'Continue '}
+              inlineStyle={styles.Button}
+              onPress={() => {
+                navigation.dispatch(
+                  StackActions.replace('TabNav')
+                );
+              }}
+            />
+          </View>
         </View>
       )}
     </SafeAreaView>
@@ -94,6 +96,10 @@ const styles = StyleSheet.create({
   Button: {
     marginTop: 30,
   },
+  buttonContainer: {
+    marginLeft: 20,
+    marginRight: 20,
+  }
 });
 
 export default RepeatWellcomePage;
