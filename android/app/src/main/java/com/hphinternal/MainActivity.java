@@ -1,4 +1,4 @@
-package com.hphinternal;
+package com.hph.management;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

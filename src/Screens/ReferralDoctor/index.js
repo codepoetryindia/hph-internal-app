@@ -22,6 +22,9 @@ import AuthContext from '../../Context/AuthContext';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import moment from 'moment';
 import DropDownPicker from 'react-native-dropdown-picker';
+import messaging from '@react-native-firebase/messaging';
+import Toast from 'react-native-simple-toast';
+import {phoneNumberAutoFormat} from '../../../Utils/phoneNumberAutoFormat';
 
 const ReferralDoctor = ({navigation, route}) => {
   const data = route?.params?.data;
@@ -40,6 +43,8 @@ const ReferralDoctor = ({navigation, route}) => {
     {label: 'No answer', value: '3'},
     {label: 'Appointment', value: '4'},
   ]);
+
+
 
   const getDoctorDetailById = token => {
     setLoader(true);
@@ -62,6 +67,34 @@ const ReferralDoctor = ({navigation, route}) => {
     let token = appState.token;
     getDoctorDetailById(token);
   }, []);
+
+  const showToast = (message) => {
+    Toast.showWithGravity(message, Toast.LONG, Toast.TOP, { backgroundColor: 'blue' });
+  }
+
+  const requestUserPermission= async ()=> {
+    const authStatus = await messaging().requestPermission();
+    return(
+        authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+        authStatus === messaging.AuthorizationStatus.PROVISIONAL
+    
+    );
+  };
+
+  useEffect(()=>{   
+    requestUserPermission();
+    const unsubscribe = messaging().onMessage(async remoteMessage => {
+      let type = JSON.parse(remoteMessage?.data?.type);
+      console.log("remoteMessage_2", remoteMessage)
+      console.log("type_2", type)
+      if(type.type = "Referral Updated"){
+        let token = appState.token;
+        getDoctorDetailById(token);
+        showToast(remoteMessage?.notification?.body)
+      }
+    });
+    return unsubscribe;
+  },[])
 
   let token = appState.token;
 
@@ -159,7 +192,7 @@ const ReferralDoctor = ({navigation, route}) => {
                   flex: 1,
                   textAlign: 'right',
                 }}>
-                {doctorData?.phone}
+                {phoneNumberAutoFormat(doctorData?.phone)}
               </Text>
             </View>
 
@@ -215,7 +248,7 @@ const ReferralDoctor = ({navigation, route}) => {
                   color: Theme.lightgray,
                 }}>
                 {moment(new Date()).format('yyyy') -
-                  moment(doctorData?.dob).format('yyyy')}{' '}
+                  doctorData?.dob_year}{' '}
                 Years old
               </Text>
             </View>
@@ -455,6 +488,10 @@ const ReferralDoctor = ({navigation, route}) => {
                   onChangeValue={value => {
                     setSatusValue(value);
                   }}
+                  listMode="SCROLLVIEW"
+                  scrollViewProps={{
+                    nestedScrollEnabled: true,
+                  }}
                 />
               </View>
 
@@ -600,7 +637,7 @@ const ReferralDoctor = ({navigation, route}) => {
                   // fontWeight: '500',
                   color: '#fff',
                 }}>
-                Doctor Informations
+                PHYSICIAN INFORMATION
               </Text>
             </View>
             <View
@@ -662,7 +699,7 @@ const ReferralDoctor = ({navigation, route}) => {
                     paddingVertical: 10,
                     color: Theme.lightgray,
                   }}>
-                  {doctorData?.referral_by?.phone}
+                  {phoneNumberAutoFormat(doctorData?.referral_by?.phone)}
                 </Text>
               </TouchableOpacity>
             </View>
@@ -694,33 +731,60 @@ const ReferralDoctor = ({navigation, route}) => {
                 {doctorData?.referral_by?.email}
               </Text>
             </View>
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                paddingHorizontal: 20,
-                paddingTop: 5,
-                marginBottom: 20,
-              }}>
-              <Text
-                Bold
+            {doctorData?.referral_by?.doctor?.speciality &&
+              <View
                 style={{
-                  fontSize: GlobalFontSize.H3,
-                  color: Theme.lightgray,
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  paddingHorizontal: 20,
+                  paddingTop: 5,
+                  marginBottom: 20,
                 }}>
-                Speciality
-              </Text>
-              <Text
+                <Text
+                  Bold
+                  style={{
+                    fontSize: GlobalFontSize.H3,
+                    color: Theme.lightgray,
+                  }}>
+                  Speciality
+                </Text>
+                <Text
+                  style={{
+                    fontSize: GlobalFontSize.H3,
+                    color: Theme.lightgray,
+                    flex: 1,
+                    textAlign: 'right',
+                  }}>
+                  {doctorData?.referral_by?.doctor?.speciality}
+                </Text>
+              </View>
+              }
+              <View
                 style={{
-                  fontSize: GlobalFontSize.H3,
-                  color: Theme.lightgray,
-                  flex: 1,
-                  textAlign: 'right',
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  paddingHorizontal: 20,
+                  paddingTop: 5,
+                  marginBottom: 20,
                 }}>
-                {/* {doctorData?.referral_by?.directory?.name} */}
-                External User
-              </Text>
-            </View>
+                <Text
+                  Bold
+                  style={{
+                    fontSize: GlobalFontSize.H3,
+                    color: Theme.lightgray,
+                  }}>
+                  Type
+                </Text>
+                <Text
+                  style={{
+                    fontSize: GlobalFontSize.H3,
+                    color: Theme.lightgray,
+                    flex: 1,
+                    textAlign: 'right',
+                  }}>
+                    {doctorData?.referral_by?.roles[0]?.name != 'normal-user' ? "Physician" : "Non Physician"}
+                </Text>
+              </View>
           </ScrollView>
         </>
       )}

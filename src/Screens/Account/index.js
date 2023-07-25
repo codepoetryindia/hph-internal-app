@@ -19,6 +19,7 @@ import AuthContext from '../../Context/AuthContext';
 import {GetRawurl} from '../../../Utils/Utils';
 import {useFocusEffect} from '@react-navigation/native';
 import Header from '../../Components/common/Header';
+import {phoneNumberAutoFormat} from '../../../Utils/phoneNumberAutoFormat';
 
 const Account = ({navigation}) => {
   const {authContext} = useContext(AuthContext);
@@ -254,7 +255,7 @@ const Account = ({navigation}) => {
                   // Bold
                   style={styles.RightSideText}>
                   {/* 9595958685 */}
-                  {accountDetails?.phone}
+                  {phoneNumberAutoFormat(accountDetails?.phone)}
                 </Text>
               </View>
             ) : null}
@@ -273,7 +274,7 @@ const Account = ({navigation}) => {
                   // Bold
                   style={styles.RightSideText}>
                   {/* 9595958685 */}
-                  {accountDetails?.category_type}
+                  {accountDetails?.user_category_type}
                 </Text>
               </View>
             ) : null}
@@ -342,7 +343,7 @@ const Account = ({navigation}) => {
                 // Bold
                 style={styles.RightSideText}>
                 {accountDetails?.doctor?.alter_phone
-                  ? accountDetails?.doctor?.alter_phone
+                  ? phoneNumberAutoFormat(accountDetails?.doctor?.alter_phone)
                   : null}
               </Text>
             </View>
@@ -466,11 +467,12 @@ const Account = ({navigation}) => {
                   <View
                     style={{
                       flexDirection: 'row',
-                      marginTop: 15,
                     }}>
                     <TouchableOpacity
                       onPress={() => {
-                        authContext.signOut();
+                        // authContext.signOut();
+                        setModalVisible(false) ,
+                        navigation.navigate('LogoutPage')
                       }}
                       style={{}}>
                       <View style={styles.modalConformText}>
@@ -598,7 +600,6 @@ const styles = StyleSheet.create({
   appLogoStyle: {
     width: 100,
     height: 30,
-    // backgroundColor:"red"
   },
   LoadarView: {
     flex: 1,
@@ -635,8 +636,6 @@ const styles = StyleSheet.create({
   HeadingText: {
     paddingHorizontal: 20,
     paddingVertical: 10,
-    // marginTop: 15,
-
     color: Theme.white,
   },
 
@@ -660,7 +659,6 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     width: '90%',
     height: '25%',
-    // justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
   },

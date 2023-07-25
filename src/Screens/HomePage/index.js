@@ -28,6 +28,9 @@ import {PermissionsAndroid} from 'react-native';
 import DatePicker from 'react-native-date-picker';
 import DropDownPicker from 'react-native-dropdown-picker';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import messaging from '@react-native-firebase/messaging';
+import Toast from 'react-native-simple-toast';
+import {phoneNumberAutoFormat} from '../../../Utils/phoneNumberAutoFormat';
 
 const Homepage = ({navigation, route}) => {
   const [loader, setLoader] = useState(false);
@@ -275,6 +278,32 @@ const Homepage = ({navigation, route}) => {
     getData(true, true);
   }, [isFilter, appliedFilters, startDate, endDate]);
 
+  const requestUserPermission= async ()=> {
+    const authStatus = await messaging().requestPermission();
+    return(
+        authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+        authStatus === messaging.AuthorizationStatus.PROVISIONAL
+    
+    );
+  };
+
+  const showToast = (message) => {
+    Toast.showWithGravity(message, Toast.LONG, Toast.TOP, { backgroundColor: 'blue' });
+  }
+
+  useEffect(()=>{
+    requestUserPermission();
+    const unsubscribe = messaging().onMessage(async remoteMessage => {
+      let type = JSON.parse(remoteMessage?.data?.type);
+      if(type.type = "Referral Updated" || type.type == "Create Referral"){
+        getData(true, true);
+        showToast(remoteMessage?.notification?.body)
+      }
+
+    });
+    return unsubscribe;
+  },[])
+
   const getData = (
     pullToRefresh = false,
     isSearchHappened = false,
@@ -386,14 +415,14 @@ const Homepage = ({navigation, route}) => {
   };
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: Theme.ScreenBackground}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: allDoctors.length > 0 ? Theme.ScreenBackground : Theme.white}}>
       {loader == true ? (
         <View style={styles.LoadarView}>
           <ActivityIndicator size={'large'} color={Theme.primary} />
         </View>
       ) : (
         <>
-          <Header name="Referrals" />
+          <Header name="Your Referrals" />
           <View
             style={{
               backgroundColor: Theme.primary,
@@ -545,8 +574,13 @@ const Homepage = ({navigation, route}) => {
               onEndReachedThreshold={0.5}
               ListFooterComponent={renderFooter}
               ListEmptyComponent={
-                <View style={{flex: 1, alignItems: 'center', marginTop: 250}}>
-                  <Text style={{color: Theme.secondary, fontWeight: '600'}}>
+                <View style={styles.appLogoStyleContainer}>
+                  <Image
+                    source={require('../../Assets/Images/notes.png')}
+                    style={styles.appLogoStyle}
+                    resizeMode="contain"
+                  />
+                  <Text Bold style={{color: Theme.secondary}}>
                     No referrals found yet.
                   </Text>
                 </View>
@@ -639,7 +673,7 @@ const Homepage = ({navigation, route}) => {
                                     selected === item.id ? '#fff' : '#3F3F3F',
                                 },
                               ]}>
-                              {item?.phone}
+                              {phoneNumberAutoFormat(item?.phone)}
                             </Text>
                           </View>
                         </View>
@@ -1140,7 +1174,6 @@ const Homepage = ({navigation, route}) => {
               padding: 30,
               borderRadius: 15,
               width: '90%',
-              height: '25%',
               // justifyContent: 'center',
               alignItems: 'center',
               flexDirection: 'column',
@@ -1155,7 +1188,7 @@ const Homepage = ({navigation, route}) => {
 
                   fontSize: 18,
                 }}>
-                Are you sure to export CSV ?
+                Are you sure you want to export (CSV)?
               </Text>
             </View>
 
@@ -1317,9 +1350,18 @@ const Homepage = ({navigation, route}) => {
 };
 
 const styles = StyleSheet.create({
+  appLogoStyleContainer: {
+    flex: 1,
+    minHeight: 300,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   appLogoStyle: {
-    width: 100,
-    height: 30,
+    width: 250,
+    height: 300,
+    resizeMode: 'contain',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   LoadarView: {
     flex: 1,
