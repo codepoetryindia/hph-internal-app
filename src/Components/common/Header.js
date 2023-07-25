@@ -23,7 +23,7 @@ const Header = ({name}) => {
             <Text
               style={{
                 color: Theme.secondary,
-                fontSize: GlobalFontSize.H2,
+                fontSize: GlobalFontSize.H3,
                 fontWeight: '700',
                 marginLeft: -90,
               }}>
