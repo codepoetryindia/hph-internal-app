@@ -303,7 +303,7 @@ const ReferralDoctor = ({navigation, route}) => {
                   flex: 1,
                   textAlign: 'right',
                 }}>
-                {doctorData?.is_spanish}
+                {doctorData?.is_spanish == 0 ? 'No' : 'Yes'}
               </Text>
             </View>
 
