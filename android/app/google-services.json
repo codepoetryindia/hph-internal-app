@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "684232612745",
+    "project_id": "hph-referral-app",
+    "storage_bucket": "hph-referral-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:684232612745:android:9224d1364988b2eec39f58",
+        "android_client_info": {
+          "package_name": "com.hph.management"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "684232612745-usn430e719g083bn4dvrpakol9likvis.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqCz13RsRHZYHVnTmj_A174uVjVsDkpU0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "684232612745-usn430e719g083bn4dvrpakol9likvis.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "684232612745-vcujfm3tbo9mkd77h2d89b4nb54diq23.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.hph.referral"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:684232612745:android:a4a80419ff49160cc39f58",
+        "android_client_info": {
+          "package_name": "com.hph.referral"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "684232612745-usn430e719g083bn4dvrpakol9likvis.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqCz13RsRHZYHVnTmj_A174uVjVsDkpU0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "684232612745-usn430e719g083bn4dvrpakol9likvis.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "684232612745-vcujfm3tbo9mkd77h2d89b4nb54diq23.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.hph.referral"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

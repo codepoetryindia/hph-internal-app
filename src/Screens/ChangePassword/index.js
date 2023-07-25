@@ -35,8 +35,6 @@ const ChangePassword = ({navigation, route}) => {
   let UserData = appState.data;
   let verificationStatus = appState.status;
 
-  console.log('verificationStatus', verificationStatus);
-
   const ChangePasswordSchema = Yup.object().shape({
     newPassword: Yup.string()
       .min(8, 'Password must contain at least 8 characters')
@@ -52,15 +50,13 @@ const ChangePassword = ({navigation, route}) => {
   });
 
   const handleSubmit = values => {
-    console.log('first value', values);
     setLoader(true);
     let data = {
       password: values.confirmPassword,
     };
-    console.log('Edit data aaaa ', data);
+
     PutMethod('api/v1/password', data, token)
       .then(Response => {
-        console.log('password reset', Response);
         setLoader(false);
         if (Response.success === true) {
           setMassage(Response.message);
