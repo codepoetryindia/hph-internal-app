@@ -285,6 +285,33 @@ const ReferralDoctor = ({navigation, route}) => {
                 flexDirection: 'row',
                 justifyContent: 'space-between',
                 paddingHorizontal: 20,
+              }}>
+              <Text
+                Bold
+                style={{
+                  fontSize: GlobalFontSize.H3,
+                  paddingVertical: 10,
+                  color: Theme.lightgray,
+                }}>
+                Do you speak Spanish
+              </Text>
+              <Text
+                style={{
+                  fontSize: GlobalFontSize.H3,
+                  paddingVertical: 10,
+                  color: Theme.lightgray,
+                  flex: 1,
+                  textAlign: 'right',
+                }}>
+                {doctorData?.is_spanish}
+              </Text>
+            </View>
+
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                paddingHorizontal: 20,
                 alignItems: 'center',
               }}>
               <Text
