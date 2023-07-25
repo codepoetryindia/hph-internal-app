@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>hphinternal</string>
+	<string>HPH Internal</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -35,10 +35,40 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>This app requires access to the camera.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This app does not require access to the microphone.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app requires access to the photo library.</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>fonts/OpenSans-Bold.ttf</string>
+		<string>fonts/OpenSans-ExtraBold.ttf</string>
+		<string>fonts/OpenSans-Regular.ttf</string>
+		<string>fonts/OpenSans-SemiBold.ttf</string>
+		<string>fonts/OpenSans-RegularBold.ttf</string>
+		<string>fonts/FontAwesome5_Regular.ttf</string>
+		<string>fonts/AntDesign.ttf</string>
+		<string>fonts/Entypo.ttf</string>
+		<string>fonts/EvilIcons.ttf</string>
+		<string>fonts/Feather.ttf</string>
+		<string>fonts/FontAwesome.ttf</string>
+		<string>fonts/FontAwesome5_Brands.ttf</string>
+		<string>fonts/FontAwesome5_Solid.ttf</string>
+		<string>fonts/Fontisto.ttf</string>
+		<string>fonts/Foundation.ttf</string>
+		<string>fonts/Ionicons.ttf</string>
+		<string>fonts/MaterialCommunityIcons.ttf</string>
+		<string>fonts/MaterialIcons.ttf</string>
+		<string>fonts/Octicons.ttf</string>
+		<string>fonts/SimpleLineIcons.ttf</string>
+		<string>fonts/Zocial.ttf</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
+	<string>BootSplash</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

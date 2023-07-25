@@ -393,6 +393,7 @@ const styles = StyleSheet.create({
     fontSize: GlobalFontSize.InputText,
     width: '75%',
     fontFamily: 'OpenSans-Regular',
+    minHeight:45
   },
   errorView: {
     width: '99%',

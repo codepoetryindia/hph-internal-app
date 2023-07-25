@@ -890,6 +890,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     fontSize: GlobalFontSize.P,
     width: '100%',
+    minHeight:45
   },
   UploadImage: {
     width: 140,
