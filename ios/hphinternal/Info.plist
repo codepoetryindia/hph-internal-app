@@ -67,6 +67,11 @@
 		<string>fonts/SimpleLineIcons.ttf</string>
 		<string>fonts/Zocial.ttf</string>
 	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
 	<key>UIFileSharingEnabled</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
