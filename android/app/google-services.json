@@ -31,10 +31,10 @@
               "client_type": 3
             },
             {
-              "client_id": "684232612745-vcujfm3tbo9mkd77h2d89b4nb54diq23.apps.googleusercontent.com",
+              "client_id": "684232612745-tq9n3g7k4rccqi12vop74kulcrfb5fbk.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.hph.referral"
+                "bundle_id": "com.hph.management"
               }
             }
           ]
@@ -67,10 +67,10 @@
               "client_type": 3
             },
             {
-              "client_id": "684232612745-vcujfm3tbo9mkd77h2d89b4nb54diq23.apps.googleusercontent.com",
+              "client_id": "684232612745-tq9n3g7k4rccqi12vop74kulcrfb5fbk.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.hph.referral"
+                "bundle_id": "com.hph.management"
               }
             }
           ]
