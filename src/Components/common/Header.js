@@ -11,7 +11,7 @@ const Header = ({name}) => {
               flexDirection: 'row',
               justifyContent: 'space-between',
               alignItems: 'center',
-              paddingHorizontal: 20,
+              paddingHorizontal: 18,
               paddingVertical: 20,
               backgroundColor: Theme.white,
             }}>
@@ -38,8 +38,8 @@ const Header = ({name}) => {
 
 const styles = StyleSheet.create({
     appLogoStyle: {
-      width: 100,
-      height: 30,
+      width: 80,
+      height: 40,
     },  
   });
 
