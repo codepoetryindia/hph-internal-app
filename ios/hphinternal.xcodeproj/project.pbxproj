@@ -519,6 +519,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = T7F8SG5UW6;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = QNQL7SV3SA;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = hphinternal/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "HPH Management";
@@ -535,6 +536,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.hph.management;
 				PRODUCT_NAME = hphinternal;
 				PROVISIONING_PROFILE_SPECIFIER = LMS;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "HPH Management Testflight";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -551,6 +553,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = T7F8SG5UW6;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = QNQL7SV3SA;
 				INFOPLIST_FILE = hphinternal/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "HPH Management";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -566,6 +569,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.hph.management;
 				PRODUCT_NAME = hphinternal;
 				PROVISIONING_PROFILE_SPECIFIER = LMS;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "HPH Management Testflight";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
