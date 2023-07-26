@@ -7,16 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00E356F31AD99517003FC87E /* hphinternalTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* hphinternalTests.m */; };
+		00E356F31AD99517003FC87E /* hphmanagementTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* hphmanagementTests.m */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		34C51E8F7999A678ADD6E317 /* libPods-hphinternal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EAE499A1F124E00CDBE17C9F /* libPods-hphinternal.a */; };
+		34C51E8F7999A678ADD6E317 /* libPods-hphmanagement.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EAE499A1F124E00CDBE17C9F /* libPods-hphmanagement.a */; };
 		3F25B47C2A6FF37600A70D00 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F25B47B2A6FF37500A70D00 /* GoogleService-Info.plist */; };
 		3F829288299E0C2200FE59A9 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 3F829287299E0C2200FE59A9 /* fonts */; };
 		3FF9B34E299E57A30004E1B9 /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FF9B34D299E57A30004E1B9 /* BootSplash.storyboard */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		FAB06A06642E8DE96D8E83DF /* libPods-hphinternal-hphinternalTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1217FCC1611A4CADC04662DB /* libPods-hphinternal-hphinternalTests.a */; };
+		FAB06A06642E8DE96D8E83DF /* libPods-hphmanagement-hphmanagementTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1217FCC1611A4CADC04662DB /* libPods-hphmanagement-hphmanagementTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,33 +25,33 @@
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = hphinternal;
+			remoteInfo = hphmanagement;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		00E356EE1AD99517003FC87E /* hphinternalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = hphinternalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356EE1AD99517003FC87E /* hphmanagementTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = hphmanagementTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* hphinternalTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = hphinternalTests.m; sourceTree = "<group>"; };
-		1217FCC1611A4CADC04662DB /* libPods-hphinternal-hphinternalTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-hphinternal-hphinternalTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07F961A680F5B00A75B9A /* hphinternal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = hphinternal.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = hphinternal/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = hphinternal/AppDelegate.mm; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = hphinternal/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = hphinternal/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = hphinternal/main.m; sourceTree = "<group>"; };
-		211F546C9C0B6C406F516906 /* Pods-hphinternalTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hphinternalTests.debug.xcconfig"; path = "Target Support Files/Pods-hphinternalTests/Pods-hphinternalTests.debug.xcconfig"; sourceTree = "<group>"; };
-		3B4392A12AC88292D35C810B /* Pods-hphinternal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hphinternal.debug.xcconfig"; path = "Target Support Files/Pods-hphinternal/Pods-hphinternal.debug.xcconfig"; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* hphmanagementTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = hphmanagementTests.m; sourceTree = "<group>"; };
+		1217FCC1611A4CADC04662DB /* libPods-hphmanagement-hphmanagementTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-hphmanagement-hphmanagementTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* hphmanagement.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = hphmanagement.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = hphmanagement/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = hphmanagement/AppDelegate.mm; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = hphmanagement/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = hphmanagement/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = hphmanagement/main.m; sourceTree = "<group>"; };
+		211F546C9C0B6C406F516906 /* Pods-hphmanagementTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hphmanagementTests.debug.xcconfig"; path = "Target Support Files/Pods-hphmanagementTests/Pods-hphmanagementTests.debug.xcconfig"; sourceTree = "<group>"; };
+		3B4392A12AC88292D35C810B /* Pods-hphmanagement.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hphmanagement.debug.xcconfig"; path = "Target Support Files/Pods-hphmanagement/Pods-hphmanagement.debug.xcconfig"; sourceTree = "<group>"; };
 		3F25B47B2A6FF37500A70D00 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3F829287299E0C2200FE59A9 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
-		3FF9B34D299E57A30004E1B9 /* BootSplash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = BootSplash.storyboard; path = hphinternal/BootSplash.storyboard; sourceTree = "<group>"; };
-		5709B34CF0A7D63546082F79 /* Pods-hphinternal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hphinternal.release.xcconfig"; path = "Target Support Files/Pods-hphinternal/Pods-hphinternal.release.xcconfig"; sourceTree = "<group>"; };
-		5B7EB9410499542E8C5724F5 /* Pods-hphinternal-hphinternalTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hphinternal-hphinternalTests.debug.xcconfig"; path = "Target Support Files/Pods-hphinternal-hphinternalTests/Pods-hphinternal-hphinternalTests.debug.xcconfig"; sourceTree = "<group>"; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = hphinternal/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		89C6BE57DB24E9ADA2F236DE /* Pods-hphinternal-hphinternalTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hphinternal-hphinternalTests.release.xcconfig"; path = "Target Support Files/Pods-hphinternal-hphinternalTests/Pods-hphinternal-hphinternalTests.release.xcconfig"; sourceTree = "<group>"; };
-		EAE499A1F124E00CDBE17C9F /* libPods-hphinternal.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-hphinternal.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3FF9B34D299E57A30004E1B9 /* BootSplash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = BootSplash.storyboard; path = hphmanagement/BootSplash.storyboard; sourceTree = "<group>"; };
+		5709B34CF0A7D63546082F79 /* Pods-hphmanagement.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hphmanagement.release.xcconfig"; path = "Target Support Files/Pods-hphmanagement/Pods-hphmanagement.release.xcconfig"; sourceTree = "<group>"; };
+		5B7EB9410499542E8C5724F5 /* Pods-hphmanagement-hphmanagementTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hphmanagement-hphmanagementTests.debug.xcconfig"; path = "Target Support Files/Pods-hphmanagement-hphmanagementTests/Pods-hphmanagement-hphmanagementTests.debug.xcconfig"; sourceTree = "<group>"; };
+		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = hphmanagement/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		89C6BE57DB24E9ADA2F236DE /* Pods-hphmanagement-hphmanagementTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hphmanagement-hphmanagementTests.release.xcconfig"; path = "Target Support Files/Pods-hphmanagement-hphmanagementTests/Pods-hphmanagement-hphmanagementTests.release.xcconfig"; sourceTree = "<group>"; };
+		EAE499A1F124E00CDBE17C9F /* libPods-hphmanagement.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-hphmanagement.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		F57E5B0B6F05F792BB9F303C /* Pods-hphinternalTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hphinternalTests.release.xcconfig"; path = "Target Support Files/Pods-hphinternalTests/Pods-hphinternalTests.release.xcconfig"; sourceTree = "<group>"; };
+		F57E5B0B6F05F792BB9F303C /* Pods-hphmanagementTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hphmanagementTests.release.xcconfig"; path = "Target Support Files/Pods-hphmanagementTests/Pods-hphmanagementTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,7 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAB06A06642E8DE96D8E83DF /* libPods-hphinternal-hphinternalTests.a in Frameworks */,
+				FAB06A06642E8DE96D8E83DF /* libPods-hphmanagement-hphmanagementTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,20 +67,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				34C51E8F7999A678ADD6E317 /* libPods-hphinternal.a in Frameworks */,
+				34C51E8F7999A678ADD6E317 /* libPods-hphmanagement.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00E356EF1AD99517003FC87E /* hphinternalTests */ = {
+		00E356EF1AD99517003FC87E /* hphmanagementTests */ = {
 			isa = PBXGroup;
 			children = (
-				00E356F21AD99517003FC87E /* hphinternalTests.m */,
+				00E356F21AD99517003FC87E /* hphmanagementTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
-			path = hphinternalTests;
+			path = hphmanagementTests;
 			sourceTree = "<group>";
 		};
 		00E356F01AD99517003FC87E /* Supporting Files */ = {
@@ -91,7 +91,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		13B07FAE1A68108700A75B9A /* hphinternal */ = {
+		13B07FAE1A68108700A75B9A /* hphmanagement */ = {
 			isa = PBXGroup;
 			children = (
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -101,15 +101,15 @@
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
-			name = hphinternal;
+			name = hphmanagement;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				EAE499A1F124E00CDBE17C9F /* libPods-hphinternal.a */,
-				1217FCC1611A4CADC04662DB /* libPods-hphinternal-hphinternalTests.a */,
+				EAE499A1F124E00CDBE17C9F /* libPods-hphmanagement.a */,
+				1217FCC1611A4CADC04662DB /* libPods-hphmanagement-hphmanagementTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -127,9 +127,9 @@
 				3F25B47B2A6FF37500A70D00 /* GoogleService-Info.plist */,
 				3FF9B34D299E57A30004E1B9 /* BootSplash.storyboard */,
 				3F829287299E0C2200FE59A9 /* fonts */,
-				13B07FAE1A68108700A75B9A /* hphinternal */,
+				13B07FAE1A68108700A75B9A /* hphmanagement */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				00E356EF1AD99517003FC87E /* hphinternalTests */,
+				00E356EF1AD99517003FC87E /* hphmanagementTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
@@ -142,8 +142,8 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* hphinternal.app */,
-				00E356EE1AD99517003FC87E /* hphinternalTests.xctest */,
+				13B07F961A680F5B00A75B9A /* hphmanagement.app */,
+				00E356EE1AD99517003FC87E /* hphmanagementTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -151,12 +151,12 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3B4392A12AC88292D35C810B /* Pods-hphinternal.debug.xcconfig */,
-				5709B34CF0A7D63546082F79 /* Pods-hphinternal.release.xcconfig */,
-				5B7EB9410499542E8C5724F5 /* Pods-hphinternal-hphinternalTests.debug.xcconfig */,
-				89C6BE57DB24E9ADA2F236DE /* Pods-hphinternal-hphinternalTests.release.xcconfig */,
-				211F546C9C0B6C406F516906 /* Pods-hphinternalTests.debug.xcconfig */,
-				F57E5B0B6F05F792BB9F303C /* Pods-hphinternalTests.release.xcconfig */,
+				3B4392A12AC88292D35C810B /* Pods-hphmanagement.debug.xcconfig */,
+				5709B34CF0A7D63546082F79 /* Pods-hphmanagement.release.xcconfig */,
+				5B7EB9410499542E8C5724F5 /* Pods-hphmanagement-hphmanagementTests.debug.xcconfig */,
+				89C6BE57DB24E9ADA2F236DE /* Pods-hphmanagement-hphmanagementTests.release.xcconfig */,
+				211F546C9C0B6C406F516906 /* Pods-hphmanagementTests.debug.xcconfig */,
+				F57E5B0B6F05F792BB9F303C /* Pods-hphmanagementTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -164,9 +164,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		00E356ED1AD99517003FC87E /* hphinternalTests */ = {
+		00E356ED1AD99517003FC87E /* hphmanagementTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "hphinternalTests" */;
+			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "hphmanagementTests" */;
 			buildPhases = (
 				A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
@@ -180,14 +180,14 @@
 			dependencies = (
 				00E356F51AD99517003FC87E /* PBXTargetDependency */,
 			);
-			name = hphinternalTests;
-			productName = hphinternalTests;
-			productReference = 00E356EE1AD99517003FC87E /* hphinternalTests.xctest */;
+			name = hphmanagementTests;
+			productName = hphmanagementTests;
+			productReference = 00E356EE1AD99517003FC87E /* hphmanagementTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		13B07F861A680F5B00A75B9A /* hphinternal */ = {
+		13B07F861A680F5B00A75B9A /* hphmanagement */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "hphinternal" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "hphmanagement" */;
 			buildPhases = (
 				C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
@@ -203,9 +203,9 @@
 			);
 			dependencies = (
 			);
-			name = hphinternal;
-			productName = hphinternal;
-			productReference = 13B07F961A680F5B00A75B9A /* hphinternal.app */;
+			name = hphmanagement;
+			productName = hphmanagement;
+			productReference = 13B07F961A680F5B00A75B9A /* hphmanagement.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -225,7 +225,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "hphinternal" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "hphmanagement" */;
 			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -238,8 +238,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* hphinternal */,
-				00E356ED1AD99517003FC87E /* hphinternalTests */,
+				13B07F861A680F5B00A75B9A /* hphmanagement */,
+				00E356ED1AD99517003FC87E /* hphmanagementTests */,
 			);
 		};
 /* End PBXProject section */
@@ -289,15 +289,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-hphinternal/Pods-hphinternal-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-hphmanagement/Pods-hphmanagement-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-hphinternal/Pods-hphinternal-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-hphmanagement/Pods-hphmanagement-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-hphinternal/Pods-hphinternal-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-hphmanagement/Pods-hphmanagement-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		3184976763BAA15C311C0B84 /* [CP] Copy Pods Resources */ = {
@@ -306,15 +306,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-hphinternal/Pods-hphinternal-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-hphmanagement/Pods-hphmanagement-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-hphinternal/Pods-hphinternal-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-hphmanagement/Pods-hphmanagement-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-hphinternal/Pods-hphinternal-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-hphmanagement/Pods-hphmanagement-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		385EA6A45AB59BCB582E4D63 /* [CP-User] [RNFB] Core Configuration */ = {
@@ -336,15 +336,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-hphinternal-hphinternalTests/Pods-hphinternal-hphinternalTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-hphmanagement-hphmanagementTests/Pods-hphmanagement-hphmanagementTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-hphinternal-hphinternalTests/Pods-hphinternal-hphinternalTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-hphmanagement-hphmanagementTests/Pods-hphmanagement-hphmanagementTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-hphinternal-hphinternalTests/Pods-hphinternal-hphinternalTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-hphmanagement-hphmanagementTests/Pods-hphmanagement-hphmanagementTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		4A4699C28E6DDD4F4D5837CF /* [CP] Copy Pods Resources */ = {
@@ -353,15 +353,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-hphinternal-hphinternalTests/Pods-hphinternal-hphinternalTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-hphmanagement-hphmanagementTests/Pods-hphmanagement-hphmanagementTests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-hphinternal-hphinternalTests/Pods-hphinternal-hphinternalTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-hphmanagement-hphmanagementTests/Pods-hphmanagement-hphmanagementTests-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-hphinternal-hphinternalTests/Pods-hphinternal-hphinternalTests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-hphmanagement-hphmanagementTests/Pods-hphmanagement-hphmanagementTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */ = {
@@ -379,7 +379,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-hphinternal-hphinternalTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-hphmanagement-hphmanagementTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -401,7 +401,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-hphinternal-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-hphmanagement-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -434,7 +434,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00E356F31AD99517003FC87E /* hphinternalTests.m in Sources */,
+				00E356F31AD99517003FC87E /* hphmanagementTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,7 +452,7 @@
 /* Begin PBXTargetDependency section */
 		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* hphinternal */;
+			target = 13B07F861A680F5B00A75B9A /* hphmanagement */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -460,14 +460,14 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-hphinternal-hphinternalTests.debug.xcconfig */;
+			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-hphmanagement-hphmanagementTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = hphinternalTests/Info.plist;
+				INFOPLIST_FILE = hphmanagementTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -481,17 +481,17 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/hphinternal.app/hphinternal";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/hphmanagement.app/hphmanagement";
 			};
 			name = Debug;
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-hphinternal-hphinternalTests.release.xcconfig */;
+			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-hphmanagement-hphmanagementTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				INFOPLIST_FILE = hphinternalTests/Info.plist;
+				INFOPLIST_FILE = hphmanagementTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -505,13 +505,13 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/hphinternal.app/hphinternal";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/hphmanagement.app/hphmanagement";
 			};
 			name = Release;
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-hphinternal.debug.xcconfig */;
+			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-hphmanagement.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -521,7 +521,7 @@
 				DEVELOPMENT_TEAM = T7F8SG5UW6;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = QNQL7SV3SA;
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = hphinternal/Info.plist;
+				INFOPLIST_FILE = hphmanagement/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "HPH Management";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -534,7 +534,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hph.management;
-				PRODUCT_NAME = hphinternal;
+				PRODUCT_NAME = hphmanagement;
 				PROVISIONING_PROFILE_SPECIFIER = LMS;
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "HPH Management Testflight";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -545,7 +545,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-hphinternal.release.xcconfig */;
+			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-hphmanagement.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -554,7 +554,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = T7F8SG5UW6;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = QNQL7SV3SA;
-				INFOPLIST_FILE = hphinternal/Info.plist;
+				INFOPLIST_FILE = hphmanagement/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "HPH Management";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -567,7 +567,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hph.management;
-				PRODUCT_NAME = hphinternal;
+				PRODUCT_NAME = hphmanagement;
 				PROVISIONING_PROFILE_SPECIFIER = LMS;
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "HPH Management Testflight";
 				SWIFT_VERSION = 5.0;
@@ -715,7 +715,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "hphinternalTests" */ = {
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "hphmanagementTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
@@ -724,7 +724,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "hphinternal" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "hphmanagement" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -733,7 +733,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "hphinternal" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "hphmanagement" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,

@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "hphinternal.app"
-               BlueprintName = "hphinternal"
-               ReferencedContainer = "container:hphinternal.xcodeproj">
+               BuildableName = "hphmanagement.app"
+               BlueprintName = "hphmanagement"
+               ReferencedContainer = "container:hphmanagement.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "hphinternalTests.xctest"
-               BlueprintName = "hphinternalTests"
-               ReferencedContainer = "container:hphinternal.xcodeproj">
+               BuildableName = "hphmanagementTests.xctest"
+               BlueprintName = "hphmanagementTests"
+               ReferencedContainer = "container:hphmanagement.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "hphinternal.app"
-            BlueprintName = "hphinternal"
-            ReferencedContainer = "container:hphinternal.xcodeproj">
+            BuildableName = "hphmanagement.app"
+            BlueprintName = "hphmanagement"
+            ReferencedContainer = "container:hphmanagement.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "hphinternal.app"
-            BlueprintName = "hphinternal"
-            ReferencedContainer = "container:hphinternal.xcodeproj">
+            BuildableName = "hphmanagement.app"
+            BlueprintName = "hphmanagement"
+            ReferencedContainer = "container:hphmanagement.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
