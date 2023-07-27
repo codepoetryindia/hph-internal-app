@@ -21,7 +21,7 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 // import {AuthContext} from '../../../AuthContext/Context';
 import {PostMethod} from '../../../../Utils/Utils';
 import AuthContext from '../../../Context/AuthContext';
-// import messaging from '@react-native-firebase/messaging';
+import messaging from '@react-native-firebase/messaging';
 // import PushNotification from 'react-native-push-notification';
 
 const SignIn = ({navigation}) => {
@@ -35,25 +35,25 @@ const SignIn = ({navigation}) => {
 
   const [FCMToken, setFCMToken] = useState('');
 
-  // const requestUserPermission = async () => {
-  //   const authStatus = await messaging().requestPermission();
+  const requestUserPermission = async () => {
+    const authStatus = await messaging().requestPermission();
    
-  //   return (
-  //     authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-  //     authStatus === messaging.AuthorizationStatus.PROVISIONAL
-  //   );
-  // };
+    return (
+      authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+      authStatus === messaging.AuthorizationStatus.PROVISIONAL
+    );
+  };
 
-  // useEffect(() => {
-  //   if (requestUserPermission()) {
-  //     messaging()
-  //       .getToken()
-  //       .then(fcmToken => {
-  //         setFCMToken(fcmToken);
-  //         // console.log('FCM Token =>>>>>', fcmToken);
-  //       });
-  //   } else console.log('Not Authorixation Status ', authStatus);
-  // }, []);
+  useEffect(() => {
+    if (requestUserPermission()) {
+      messaging()
+        .getToken()
+        .then(fcmToken => {
+          setFCMToken(fcmToken);
+          // console.log('FCM Token =>>>>>', fcmToken);
+        });
+    } else console.log('Not Authorixation Status ', authStatus);
+  }, []);
 
   // useEffect(() => {
   //   messaging().setBackgroundMessageHandler(async remoteMessage => {
