@@ -69,6 +69,8 @@ const Homepage = ({navigation, route}) => {
   const [items, setItems] = useState([
     {label: 'Today', value: 'today'},
     {label: 'Last 7 days', value: 'last_7_days'},
+    {label: 'Last 30 days', value: 'last_30_days'},
+    {label: 'Last 90 days', value: 'last_90_days'},
     {label: 'Custom', value: 'custom', selected: true},
   ]);
   const [directoryItems, setDirectoryItems] = useState([
@@ -195,14 +197,25 @@ const Homepage = ({navigation, route}) => {
           startDate: moment(new Date()).format('YYYY-MM-DD'),
           endDate: moment(new Date()).format('YYYY-MM-DD'),
         };
-        break;
+      break;
       case 'last_7_days':
         return {
           startDate: moment().subtract(7, 'days').format('YYYY-MM-DD'),
           endDate: moment(new Date()).format('YYYY-MM-DD'),
         };
         break;
-
+      case 'last_30_days':
+        return {
+          startDate: moment().subtract(30, 'days').format('YYYY-MM-DD'),
+          endDate: moment(new Date()).format('YYYY-MM-DD'),
+        };
+      break;
+      case 'last_90_days':
+        return {
+          startDate: moment().subtract(90, 'days').format('YYYY-MM-DD'),
+          endDate: moment(new Date()).format('YYYY-MM-DD'),
+        };
+      break;
       case 'custom':
         return {
           startDate: moment(startDate).format('YYYY-MM-DD'),
