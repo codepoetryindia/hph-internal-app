@@ -428,7 +428,7 @@ const styles = StyleSheet.create({
     fontSize: GlobalFontSize.P,
   },
   BottomPart: {
-    flexDirection: 'row',
+    paddingHorizontal: 20,
     textAlign: 'center',
     alignItems: 'center',
     justifyContent: 'center',
