@@ -280,7 +280,7 @@ const ReferralDoctor = ({navigation, route}) => {
               </Text>
             </View>
 
-            <View
+            {/* <View
               style={{
                 flexDirection: 'row',
                 justifyContent: 'space-between',
@@ -305,7 +305,7 @@ const ReferralDoctor = ({navigation, route}) => {
                 }}>
                 {doctorData?.is_spanish == 0 ? 'No' : 'Yes'}
               </Text>
-            </View>
+            </View> */}
 
             <View
               style={{
