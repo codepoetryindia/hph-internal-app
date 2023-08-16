@@ -225,6 +225,24 @@ const SignIn = ({navigation}) => {
                         inlineStyle={{margin: 20, marginTop: 20}}
                         onPress={() => handleSubmit()}
                       />
+
+                      <View style={styles.BottomPart}>
+                        <Text style={styles.bottomContent}>
+                          If you have forgotten the password ?
+                        </Text>
+
+                        <TouchableOpacity
+                          onPress={() => {
+                            navigation.navigate('ForgotPassword');
+                          }}>
+                          <Text
+                            style={[styles.bottomContent, {color: Theme.primary}]}>
+                            {' '}
+                            Forgot password
+                          </Text>
+                        </TouchableOpacity>
+                      </View>
+
                     </View>
                   )}
                 </Formik>
@@ -405,15 +423,12 @@ const styles = StyleSheet.create({
     maxWidth: 300,
     alignSelf: 'center',
   },
-
   bottomContent: {
     color: Theme.white,
     fontSize: GlobalFontSize.P,
   },
   BottomPart: {
     flexDirection: 'row',
-    marginTop: 100,
-    marginVertical: 40,
     textAlign: 'center',
     alignItems: 'center',
     justifyContent: 'center',
@@ -421,7 +436,3 @@ const styles = StyleSheet.create({
 });
 
 export default SignIn;
-
-{
-  /*  */
-}
