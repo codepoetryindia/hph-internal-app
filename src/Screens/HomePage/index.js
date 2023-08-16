@@ -463,7 +463,6 @@ const Homepage = ({navigation, route}) => {
                   horizontal={true}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({item, index}) => {
-                    // console.log(item,"jhjhgjg")
                     return (
                       <TouchableOpacity
                         style={[
@@ -523,7 +522,7 @@ const Homepage = ({navigation, route}) => {
             <FlatList
               data={allDoctors}
               style={{
-                marginBottom: isFilter ? 60 : 130,
+                marginBottom: isFilter ? 200 : 150,
                 marginTop: isFilter ? 2 : 10,
               }}
               refreshControl={
@@ -1314,6 +1313,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+
   LoadarView: {
     flex: 1,
     justifyContent: 'center',
@@ -1326,7 +1326,7 @@ const styles = StyleSheet.create({
   },
   ListStyle: {
     backgroundColor: Theme.white,
-    margin: 10,
+    marginBottom: 15,
     marginHorizontal: 15,
     borderRadius: 10,
     flexDirection: 'row',
@@ -1363,6 +1363,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
   searchIcon: {
+    // paddingLeft: 7,
+    // opacity: 0.5,
     paddingLeft: 3,
   },
   InputStyle: {
@@ -1441,8 +1443,6 @@ const styles = StyleSheet.create({
     borderColor: Theme.lightgray,
     fontSize: GlobalFontSize.H3,
     height: 60,
-
-    // zIndex: 99999,
   },
   placeholderStyles: {
     color: 'grey',
@@ -1465,7 +1465,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-
   filterButton: {
     // height: 30,
     paddingHorizontal: 10,
@@ -1479,6 +1478,11 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     borderWidth: 1,
     borderColor: '#B7B7B7',
+  },
+  dropdown: {
+    borderColor: Theme.lightgray,
+    fontSize: GlobalFontSize.H3,
+    // zIndex: 99999,
   },
 });
 
