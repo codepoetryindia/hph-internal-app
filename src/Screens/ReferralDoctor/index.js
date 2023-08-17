@@ -811,7 +811,7 @@ const ReferralDoctor = ({navigation, route}) => {
                     flex: 1,
                     textAlign: 'right',
                   }}>
-                    {doctorData?.referral_by?.roles[0]?.name != 'normal-user' ? "Physician" : "Non Physician"}
+                    {doctorData?.referral_by?.roles[0]?.name != 'normal-user' ? "NPI" : "Non NPI"}
                 </Text>
               </View>
           </ScrollView>
