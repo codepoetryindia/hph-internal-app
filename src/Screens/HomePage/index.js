@@ -75,8 +75,8 @@ const Homepage = ({navigation, route}) => {
     {label: 'Custom', value: 'custom', selected: true},
   ]);
   const [directoryItems, setDirectoryItems] = useState([
-    {label: 'Physician', value: 'physician'},
-    {label: 'Non Physician', value: 'non-physician'},
+    {label: 'NPI', value: 'physician'},
+    {label: 'Non NPI', value: 'non-physician'},
   ]);
 
   // useEffect(() => {
@@ -531,10 +531,17 @@ const Homepage = ({navigation, route}) => {
                           setappliedFilters(nextCounters);
                         }}>
                         <Text
-                          style={{color: '#000', textTransform: 'capitalize'}}>
-                          {item?.Value
-                            ? item?.Value.replace(/_|-/g, ' ')
-                            : null}
+                          style={{
+                            color: '#000', 
+                            textTransform: (item?.Value === "physician" || item?.Value === "non-physician") ? 'none' : 'capitalize'
+                          }}>
+                          {
+                            item?.Value === "physician" || item?.Value === "non-physician" ? (
+                              item?.Value === "physician" ? "NPI" : "Non NPI"
+                            ) : (
+                              item?.Value ? item?.Value.replace(/_|-/g, ' ') : null
+                            )
+                          }
                         </Text>
                         <Ionicons
                           style={styles.searchIcon}
