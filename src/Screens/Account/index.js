@@ -337,7 +337,7 @@ const Account = ({navigation}) => {
                   fontFamily: 'OpenSans-SemiBold',
                   color: Theme.lightgray,
                 }}>
-                Mobile Number 2
+                Office Number
               </Text>
               <Text
                 // Bold
@@ -357,7 +357,7 @@ const Account = ({navigation}) => {
                   fontFamily: 'OpenSans-SemiBold',
                   color: Theme.lightgray,
                 }}>
-                Street
+                Street Address
               </Text>
 
               <Text

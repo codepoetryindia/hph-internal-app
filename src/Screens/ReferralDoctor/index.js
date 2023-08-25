@@ -709,7 +709,7 @@ const ReferralDoctor = ({navigation, route}) => {
                   paddingVertical: 10,
                   color: Theme.lightgray,
                 }}>
-                Office Number
+                Mobile Number
               </Text>
               <TouchableOpacity
                 style={{flexDirection: 'row', alignItems: 'center'}}
@@ -732,6 +732,47 @@ const ReferralDoctor = ({navigation, route}) => {
                 </Text>
               </TouchableOpacity>
             </View>
+
+            {doctorData?.referral_by?.roles[0]?.name != 'normal-user' ? (
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  paddingHorizontal: 20,
+                }}>
+                <Text
+                  Bold
+                  style={{
+                    fontSize: GlobalFontSize.H3,
+                    paddingVertical: 10,
+                    color: Theme.lightgray,
+                  }}>
+                  Office Number
+                </Text>
+                {doctorData?.referral_by?.doctor?.alter_phone ? (
+                  <TouchableOpacity
+                    style={{flexDirection: 'row', alignItems: 'center'}}
+                    onPress={() => {
+                      Linking.openURL(`tel:${doctorData?.referral_by?.doctor?.alter_phone}`);
+                    }}>
+                    <Ionicons
+                      style={{paddingHorizontal: 10}}
+                      name="call"
+                      color={Theme.secondary}
+                      size={17}
+                    />
+                    <Text
+                      style={{
+                        fontSize: 18,
+                        paddingVertical: 10,
+                        color: Theme.lightgray,
+                      }}>
+                      {phoneNumberAutoFormat(doctorData?.referral_by?.doctor?.alter_phone)}
+                    </Text>
+                  </TouchableOpacity>
+                ) : null}
+              </View>
+            ) : null}
 
             <View
               style={{
