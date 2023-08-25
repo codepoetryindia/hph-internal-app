@@ -47,7 +47,7 @@ const EditProfile = ({navigation, route}) => {
     phone2: Yup.string()
         .nullable()
         .notRequired()
-        .test('mobileNumber', 'Phone Number 2 is not valid', data => {
+        .test('mobileNumber', 'Office Number is not valid', data => {
           if(data){
             return (removehoneNumberFormat(data).length < 10 ? false : true )
           } else {
@@ -564,7 +564,7 @@ const EditProfile = ({navigation, route}) => {
                       ]}>
                       <TextInput
                         style={styles.textinputstyle}
-                        placeholder="Phone Number"
+                        placeholder="Mobile Number"
                         placeholderTextColor={Theme.lightgray}
                         keyboardType="phone-pad"
                         onChangeText={handleChange('phone')}
@@ -588,7 +588,7 @@ const EditProfile = ({navigation, route}) => {
                       ]}>
                       <TextInput
                         style={styles.textinputstyle}
-                        placeholder="Phone Number 2 (Optional)"
+                        placeholder="Office Number (Optional)"
                         placeholderTextColor={Theme.lightgray}
                         keyboardType="phone-pad"
                         maxLength={12}
