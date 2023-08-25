@@ -249,7 +249,7 @@ const Account = ({navigation}) => {
                     color: Theme.lightgray,
                     fontFamily: 'OpenSans-SemiBold',
                   }}>
-                  Phone Number
+                  Mobile Number
                 </Text>
                 <Text
                   // Bold
@@ -337,7 +337,7 @@ const Account = ({navigation}) => {
                   fontFamily: 'OpenSans-SemiBold',
                   color: Theme.lightgray,
                 }}>
-                Phone Number 2
+                Mobile Number 2
               </Text>
               <Text
                 // Bold

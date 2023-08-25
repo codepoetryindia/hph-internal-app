@@ -182,7 +182,7 @@ const ReferralDoctor = ({navigation, route}) => {
                   paddingVertical: 10,
                   color: Theme.lightgray,
                 }}>
-                Phone
+                Mobile Number
               </Text>
               <Text
                 style={{
@@ -709,7 +709,7 @@ const ReferralDoctor = ({navigation, route}) => {
                   paddingVertical: 10,
                   color: Theme.lightgray,
                 }}>
-                Number
+                Office Number
               </Text>
               <TouchableOpacity
                 style={{flexDirection: 'row', alignItems: 'center'}}
@@ -775,7 +775,7 @@ const ReferralDoctor = ({navigation, route}) => {
                     fontSize: GlobalFontSize.H3,
                     color: Theme.lightgray,
                   }}>
-                  Speciality
+                  Specialty
                 </Text>
                 <Text
                   style={{
