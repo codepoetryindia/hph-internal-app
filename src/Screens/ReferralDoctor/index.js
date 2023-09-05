@@ -682,7 +682,7 @@ const ReferralDoctor = ({navigation, route}) => {
                   paddingVertical: 10,
                   color: Theme.lightgray,
                 }}>
-                Fullname
+                Full Name
               </Text>
               <Text
                 style={{
