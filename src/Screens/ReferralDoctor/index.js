@@ -24,7 +24,7 @@ import moment from 'moment';
 import DropDownPicker from 'react-native-dropdown-picker';
 import messaging from '@react-native-firebase/messaging';
 import Toast from 'react-native-simple-toast';
-import {phoneNumberAutoFormat} from '../../../Utils/phoneNumberAutoFormat';
+import {phoneNumberAutoFormat, dialNumberAutoFormat} from '../../../Utils/phoneNumberAutoFormat';
 
 const ReferralDoctor = ({navigation, route}) => {
   const data = route?.params?.data;
@@ -753,7 +753,7 @@ const ReferralDoctor = ({navigation, route}) => {
                   <TouchableOpacity
                     style={{flexDirection: 'row', alignItems: 'center'}}
                     onPress={() => {
-                      Linking.openURL(`tel:${doctorData?.referral_by?.doctor?.alter_phone}`);
+                      Linking.openURL(`tel:${dialNumberAutoFormat(doctorData?.referral_by?.doctor?.alter_phone)}`);
                     }}>
                     <Ionicons
                       style={{paddingHorizontal: 10}}
@@ -767,7 +767,7 @@ const ReferralDoctor = ({navigation, route}) => {
                         paddingVertical: 10,
                         color: Theme.lightgray,
                       }}>
-                      {phoneNumberAutoFormat(doctorData?.referral_by?.doctor?.alter_phone)}
+                      {phoneNumberAutoFormat(doctorData?.referral_by?.doctor?.alter_phone, true)}
                     </Text>
                   </TouchableOpacity>
                 ) : null}

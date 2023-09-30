@@ -343,7 +343,7 @@ const Account = ({navigation}) => {
                 // Bold
                 style={styles.RightSideText}>
                 {accountDetails?.doctor?.alter_phone
-                  ? phoneNumberAutoFormat(accountDetails?.doctor?.alter_phone)
+                  ? phoneNumberAutoFormat(accountDetails?.doctor?.alter_phone, true)
                   : null}
               </Text>
             </View>
