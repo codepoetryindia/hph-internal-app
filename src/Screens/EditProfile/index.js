@@ -591,7 +591,7 @@ const EditProfile = ({navigation, route}) => {
                         placeholder="Office Number (Optional)"
                         placeholderTextColor={Theme.lightgray}
                         keyboardType="phone-pad"
-                        maxLength={12}
+                        maxLength={17}
                         onChangeText={handleChange('phone2')}
                         onBlur={handleBlur('phone2')}
                         value={phoneNumberAutoFormat(values.phone2)}
